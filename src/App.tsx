@@ -3,10 +3,9 @@ import { useEffect, useMemo, useState } from "react";
 import { MainLayout } from "./layouts/MainLayout";
 import { useActiveSection } from "./hooks/useActiveSection";
 import { smoothScrollTo } from "./lib/smoothScrollTo";
-
+import { AboutSection } from "./sections/AboutSection";
 import { HomeSection } from "./sections/HomeSection";
 import { ProjectsSection } from "./sections/ProjectsSection";
-import { AboutSection } from "./sections/AboutSection";
 import { ContactSection } from "./sections/ContactSection";
 
 const sectionIds = ["home", "projects", "about", "contact"];
@@ -72,8 +71,8 @@ export default function App() {
     onActiveSectionChange={setActiveId}
     onNavLockChange={setLockedNavId}    >
       <HomeSection />
-      <ProjectsSection />
       <AboutSection />
+      <ProjectsSection />
       <ContactSection />
     </MainLayout>
   );
