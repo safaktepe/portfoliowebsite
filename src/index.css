@@ -4,6 +4,10 @@ html, body, #root {
   margin: 0;
 }
 
+:root {
+  --accent: #3b82f6;
+}
+
 /* Full black theme */
 body {
   background: #000;

@@ -1,0 +1,65 @@
+.sidebar {
+    width: 260px;
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border-right: 1px solid #222;
+    position: sticky;
+    top: 24px;
+    height: calc(100vh - 48px);
+    align-self: flex-start;
+  }
+  
+  .nav {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .navLink {
+    display: block;
+    padding: 10px 12px 10px 14px;
+    font-size: 26px;
+    line-height: 1.2;
+    margin-left: 8px;
+    text-decoration: none;
+    color: #aaa;
+    font-weight: 400;
+  
+    border-radius: 10px;
+  
+    transform: translateZ(0);
+    transition:
+      color 180ms ease,
+      transform 180ms ease,
+      background-color 180ms ease,
+      box-shadow 180ms ease;
+  }
+  
+  .navLink[data-active="true"] {
+    color: #fff;
+    font-weight: 600;
+  }
+  
+  /* Hover = subtle "lift" + glow highlight */
+  .navLink:hover {
+    color: #fff;
+    transform: translateX(2px) scale(1.03);
+    background-color: color-mix(in srgb, var(--accent) 14%, transparent);
+    box-shadow: 0 0 24px color-mix(in srgb, var(--accent) 18%, transparent);
+  }
+  
+  /* Keyboard accessibility */
+  .navLink:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--accent) 75%, transparent);
+    outline-offset: 2px;
+    color: #fff;
+    background-color: color-mix(in srgb, var(--accent) 16%, transparent);
+  }
+  
+  /* Slightly calmer hover when already active */
+  .navLink[data-active="true"]:hover {
+    transform: translateX(2px) scale(1.02);
+  }
+  

@@ -68,10 +68,9 @@ export default function App() {
 
   return (
     <MainLayout
-      activeSectionId={displayActiveId}
-      onActiveSectionChange={setActiveId}
-      onNavLockChange={setLockedNavId}
-    >
+    activeSectionId={displayActiveId}
+    onActiveSectionChange={setActiveId}
+    onNavLockChange={setLockedNavId}    >
       <HomeSection />
       <ProjectsSection />
       <AboutSection />
