@@ -1,0 +1,85 @@
+:root {
+    --sidebar-width: 260px;
+  }
+  
+  .scrollHint {
+    position: fixed;
+    left: calc(var(--sidebar-width) + (100vw - var(--sidebar-width)) / 2);
+    bottom: 22px;
+    transform: translateX(-50%);
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  
+    opacity: 0.75;
+    pointer-events: none;
+    z-index: 50;
+  }
+  
+  @media (max-width: 900px) {
+    .scrollHint {
+      left: 50%;
+    }
+  }
+  
+  .scrollPath,
+  .scrollArrow {
+    stroke: rgba(255, 255, 255, 0.7);
+    stroke-width: 3;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  
+  .scrollPath {
+    stroke-dasharray: 320;
+    stroke-dashoffset: 320;
+    animation: drawPath 2.4s ease-in-out infinite;
+  }
+  
+  .scrollArrow {
+    stroke-dasharray: 60;
+    stroke-dashoffset: 60;
+    animation: drawArrow 2.4s ease-in-out infinite;
+  }
+  
+  .scrollText {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  
+  @keyframes drawPath {
+    0% {
+      stroke-dashoffset: 320;
+      opacity: 0;
+    }
+    30% {
+      opacity: 1;
+    }
+    60% {
+      stroke-dashoffset: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  
+  @keyframes drawArrow {
+    0%,
+    40% {
+      stroke-dashoffset: 60;
+      opacity: 0;
+    }
+    60% {
+      opacity: 1;
+    }
+    100% {
+      stroke-dashoffset: 0;
+      opacity: 0;
+    }
+  }
+  

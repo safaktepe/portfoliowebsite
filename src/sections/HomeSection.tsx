@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { smoothScrollTo } from "../lib/smoothScrollTo";
 import "../styles/home.css";
+import "../styles/scrollHint.css";
 
 export function HomeSection() {
   const [isVisible, setIsVisible] = useState(false);
+  const [contentReady, setContentReady] = useState(false);
 
   useEffect(() => {
     const prefersReducedMotion =
@@ -11,11 +13,17 @@ export function HomeSection() {
 
     if (prefersReducedMotion) {
       setIsVisible(true);
+      setContentReady(true);
       return;
     }
 
-    const t = window.setTimeout(() => setIsVisible(true), 480);
-    return () => window.clearTimeout(t);
+    const cardTimer = window.setTimeout(() => setIsVisible(true), 480);
+    const contentTimer = window.setTimeout(() => setContentReady(true), 660);
+
+    return () => {
+      window.clearTimeout(cardTimer);
+      window.clearTimeout(contentTimer);
+    };
   }, []);
 
   function scrollToSection(id: string) {
@@ -39,10 +47,15 @@ export function HomeSection() {
   return (
     <section id="home" className="homeSection">
       <div className={`heroCard ${isVisible ? "isVisible" : ""}`}>
-        <h1 className="heroTitle">Software Developer</h1>
-        <p className="heroSubtitle">Mert Safaktepe</p>
+        <h1 className={`heroTitle ${contentReady ? "contentVisible" : ""}`}>
+          Software Developer
+        </h1>
 
-        <div className="heroActions">
+        <p className={`heroSubtitle ${contentReady ? "contentVisible" : ""}`}>
+          Mert Safaktepe
+        </p>
+
+        <div className={`heroActions ${contentReady ? "contentVisible" : ""}`}>
           <button
             type="button"
             className="primaryBtn"
@@ -59,6 +72,29 @@ export function HomeSection() {
             Contact Me
           </button>
         </div>
+      </div>
+
+      <div className="scrollHint" aria-hidden="true">
+        <svg
+          width="140"
+          height="110"
+          viewBox="0 0 140 110"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            className="scrollPath"
+            d="M18 18
+               C 55 10, 70 35, 58 52
+               C 44 72, 72 86, 86 68
+               C 100 52, 98 30, 120 26
+               C 132 24, 128 52, 104 66
+               C 88 76, 84 92, 84 98"
+          />
+          <path className="scrollArrow" d="M78 92 L84 98 L90 92" />
+        </svg>
+
+        <span className="scrollText">Scroll down</span>
       </div>
     </section>
   );

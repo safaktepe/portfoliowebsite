@@ -30,8 +30,10 @@
   
     position: relative;
     overflow: visible;
-    margin-top: -48px;
+    margin-top: -322px;
   }
+
+  
   
   .heroCard::before {
     content: "";
@@ -206,4 +208,85 @@
     transform: scale(1);
   }
   
+  
+  .scrollHint {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+
+    opacity: 0.75;
+    pointer-events: none;
+    bottom: 16px;
+  }
+
+  .scrollPath {
+    stroke-dasharray: 320;
+    stroke-dashoffset: 320;
+    animation: drawPath 2.4s ease-in-out infinite;
+  }
+  
+  .scrollArrow {
+    stroke-dasharray: 60;
+    stroke-dashoffset: 60;
+    animation: drawArrow 2.4s ease-in-out infinite;
+  }
+  
+
+/* drawing effect */
+.scrollPath {
+  stroke-dasharray: 180;
+  stroke-dashoffset: 180;
+  animation: drawPath 2.2s ease-in-out infinite;
+}
+
+.scrollArrow {
+  stroke-dasharray: 40;
+  stroke-dashoffset: 40;
+  animation: drawArrow 2.2s ease-in-out infinite;
+}
+
+@keyframes drawPath {
+  0% {
+    stroke-dashoffset: 320;
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  60% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes drawArrow {
+  0%,
+  40% {
+    stroke-dashoffset: 60;
+    opacity: 0;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+
+
+  .scrollText {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+  }
   
