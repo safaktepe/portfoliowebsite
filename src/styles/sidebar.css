@@ -2,6 +2,8 @@
     width: 260px;
     padding: 24px 16px;
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
     gap: 16px;
     border-right: 1px solid #222;
@@ -15,6 +17,8 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    gap: 18px;
+    align-items: center;
   }
   
   .navLink {
@@ -26,7 +30,6 @@
     text-decoration: none;
     color: #aaa;
     font-weight: 400;
-  
     border-radius: 10px;
   
     transform: translateZ(0);
