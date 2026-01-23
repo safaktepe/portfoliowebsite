@@ -3,18 +3,18 @@
   }
   
   .scrollHint {
-    position: fixed;
+    position: absolute;
     left: calc(var(--sidebar-width) + (100vw - var(--sidebar-width)) / 2);
-    bottom: 22px;
     transform: translateX(-50%);
-  
+    bottom: 48px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 8px;
-  
+    cursor: pointer;
+    pointer-events: auto;    
     opacity: 0.75;
-    pointer-events: none;
     z-index: 50;
   }
   
@@ -81,5 +81,19 @@
       stroke-dashoffset: 0;
       opacity: 0;
     }
+  }
+  
+  @media (max-width: 768px) {
+    .scrollHint {
+      display: none;
+    }
+  }
+  
+  .scrollHint:hover {
+    opacity: 1;
+  }
+  
+  .scrollHint:hover .scrollText {
+    color: rgba(255, 255, 255, 0.8);
   }
   
