@@ -1,0 +1,17 @@
+export default function App() {
+  return (
+    <div
+      style={{
+        minHeight: "100vh",
+        backgroundColor: "#000",
+        color: "#fff",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontFamily: "system-ui, -apple-system, Segoe UI, Roboto, sans-serif",
+      }}
+    >
+      <h1 style={{ fontSize: 48, fontWeight: 700 }}>BLACK SITE</h1>
+    </div>
+  );
+}

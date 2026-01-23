@@ -1,0 +1,18 @@
+/* Full-screen reset */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+/* Full black theme */
+body {
+  background: #000;
+  color: #fff;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+section {
+  min-height: 100vh;
+  padding: 72px 0;
+  border-top: 1px solid #111;
+}
