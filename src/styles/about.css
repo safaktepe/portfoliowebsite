@@ -1,10 +1,10 @@
 .aboutSection {
     position: relative;
-    padding: 140px 0;
-    border-top: 1px solid #111;
+    padding-top: 140px;
+    padding-bottom: 200px;
     overflow: hidden;
   }
-  
+    
   .aboutSection::before {
     content: "";
     position: absolute;
@@ -28,7 +28,7 @@
   
 
   .aboutInner {
-    width: 50%;
+    width: 60%;
     margin-left: auto;
     margin-right: auto;
   }
@@ -143,5 +143,10 @@
     transform: scale(1.03);
     background: rgba(255, 255, 255, 0.085);
     border-color: rgba(255, 255, 255, 0.18);
+  }
+  
+
+  .aboutSection {
+    border-top: none !important;
   }
   

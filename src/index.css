@@ -18,7 +18,6 @@ body {
 }
 
 section {
-  min-height: 100vh;
   padding: 72px 0;
   border-top: 1px solid #111;
 }
