@@ -24,8 +24,35 @@ export function AboutSection() {
             Currently based in Dortmund, I'm fluent in German (B2 level) and
             always looking to tackle exciting challenges in the tech world.
           </p>
+          <ul className="skillList" aria-label="Skills">
+  {[
+    "Swift",
+    "SwiftUI",
+    "UIKit",
+    "Core Data",
+    "ARKit",
+    "Core ML",
+    "Combine",
+    "Git",
+    "Figma",
+    "MVVM",
+    "MVC",
+    "Firebase",
+    "REST API",
+    "Alamofire",
+    "CocoaPods",
+  ].map((skill) => (
+    <li key={skill} className="skillItem">
+      {skill}
+    </li>
+  ))}
+</ul>
+
+
         </div>
       </div>
+      
     </section>
   );
 }
+
