@@ -96,6 +96,41 @@
     opacity: 0.28;
     filter: blur(22px);
   }
+
+  /* Mouse spotlight */
+.contactCard::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+  
+    background: radial-gradient(
+      160px 160px at var(--mx, 50%) var(--my, 35%),
+      rgba(59, 130, 246, 0.22),
+      transparent 62%
+    );
+  
+    opacity: 0;
+    transition: opacity 180ms ease;
+    z-index: 0;
+  }
+  
+  .contactCard:hover::after {
+    opacity: 1;
+  }
+
+  @media (hover: none) {
+    .contactCard::after {
+      display: none;
+    }
+  }
+  
+  .contactCard > * {
+    position: relative;
+    z-index: 1;
+  }
+    
   
   .contactCardTitle {
     margin: 0 0 14px;

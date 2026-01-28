@@ -51,6 +51,17 @@ function Icon({ name }: { name: (typeof SOCIALS)[number]["icon"] }) {
 }
 
 export function ContactSection() {
+  function handleCardSpotlight(e: React.MouseEvent<HTMLElement>) {
+    const el = e.currentTarget;
+    const r = el.getBoundingClientRect();
+
+    const x = ((e.clientX - r.left) / r.width) * 100;
+    const y = ((e.clientY - r.top) / r.height) * 100;
+
+    el.style.setProperty("--mx", `${x}%`);
+    el.style.setProperty("--my", `${y}%`);
+  }
+
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     // Placeholder: wire to your backend/service later.
@@ -65,7 +76,14 @@ export function ContactSection() {
         </header>
 
         <div className="contactGrid">
-          <div className="contactCard">
+          <div
+            className="contactCard"
+            onMouseMove={handleCardSpotlight}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.removeProperty("--mx");
+              e.currentTarget.style.removeProperty("--my");
+            }}
+          >
             <h3 className="contactCardTitle">Get in Touch</h3>
 
             <form className="contactForm" onSubmit={onSubmit}>
@@ -96,7 +114,14 @@ export function ContactSection() {
             </form>
           </div>
 
-          <aside className="contactCard">
+          <aside
+            className="contactCard"
+            onMouseMove={handleCardSpotlight}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.removeProperty("--mx");
+              e.currentTarget.style.removeProperty("--my");
+            }}
+          >
             <h3 className="contactCardTitle">Connect With Me</h3>
 
             <div className="socialRow" aria-label="Social links">
