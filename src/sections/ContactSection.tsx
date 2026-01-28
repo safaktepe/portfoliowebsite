@@ -128,12 +128,11 @@ export function ContactSection() {
               </p>
             </div>
 
-            <a className="resumeBtn" href="/resume.pdf" target="_blank" rel="noreferrer">
-              <span className="resumeIcon" aria-hidden="true">
-                ⬇
-              </span>
-              Download My Resume
-            </a>
+            <div className="contactResumeWrap">
+              <a className="resumeBtn" href="/resume.pdf" target="_blank" rel="noreferrer">
+                Download My Resume
+              </a>
+            </div>
           </aside>
         </div>
       </div>

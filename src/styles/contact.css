@@ -1,7 +1,7 @@
 .contactSection {
     position: relative;
     padding-top: 200px;
-    padding-bottom: 140px;
+    padding-bottom: 300px;
     overflow: hidden;
     isolation: isolate;
   }
@@ -54,9 +54,9 @@
   
   .contactGrid {
     display: grid;
-    grid-template-columns: 1.05fr 0.95fr;
-    gap: 22px;
-    align-items: start;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: stretch;
   }
   
   @media (max-width: 1000px) {
@@ -67,6 +67,9 @@
   
   .contactCard {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
     border-radius: 16px;
     padding: 26px;
     overflow: hidden;
@@ -81,6 +84,7 @@
       0 0 0 1px rgba(255, 255, 255, 0.04) inset,
       0 24px 70px rgba(0, 0, 0, 0.6);
   }
+
   
   .contactCard::before {
     content: "";
@@ -122,6 +126,7 @@
   
     padding: 12px 12px;
     outline: none;
+    box-sizing: border-box; 
   
     transition: border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
   }
@@ -144,10 +149,10 @@
   }
   
   .contactPrimaryBtn {
-    margin-top: 6px;
+    margin-top: 11px;
     width: 100%;
     border: 0;
-    border-radius: 12px;
+    border-radius: 9px;
     padding: 12px 14px;
   
     background: #fff;
@@ -158,6 +163,7 @@
   
     transition: transform 180ms ease, filter 180ms ease;
   }
+
   
   .contactPrimaryBtn:hover {
     transform: scale(1.01);
@@ -216,23 +222,27 @@
   }
   
   .resumeBtn {
-    margin-top: 22px;
+    margin-top: 6px;
     width: 100%;
-    border-radius: 12px;
+    border: 0;
+    border-radius: 8px;
+
     padding: 12px 14px;
   
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
   
     text-decoration: none;
     color: rgba(255, 255, 255, 0.92);
+    font-weight: 700; 
   
     background: rgba(255, 255, 255, 0.06);
     border: 1px solid rgba(255, 255, 255, 0.12);
   
     transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
+    box-sizing: border-box;
   }
   
   .resumeBtn:hover {
@@ -245,9 +255,6 @@
     transform: scale(0.99);
   }
   
-  .resumeIcon {
-    opacity: 0.85;
-  }
   
   /* a11y */
   .srOnly {
@@ -262,3 +269,8 @@
     border: 0;
   }
   
+ 
+
+  .contactResumeWrap {
+    margin-top: auto;
+  }
