@@ -44,7 +44,7 @@ function SmallProjectCard({ href, imageSrc, title, description }: SmallProjectPr
       onMouseLeave={handleCardMouseLeave}
     >
       <figure className="projectMedia">
-        <img src={imageSrc} alt={`${title} preview`} />
+      <img src={bedtimeImg} alt="Bedtime Stories preview" />
       </figure>
 
       <div className="projectBody">

@@ -89,7 +89,10 @@
     border-radius: 16px;
     padding: 22px;
     min-height: 520px;
-  
+
+    --mx: 50%;
+    --my: 30%;
+
     display: flex;
     flex-direction: column;
   
@@ -122,20 +125,19 @@
   
   /* Soft highlight */
   .projectCard::before {
-    content: "";
-    position: absolute;
-    inset: -30px;
-    pointer-events: none;
-  
-    background: radial-gradient(
-      520px 220px at 18% 12%,
-      rgba(255, 255, 255, 0.10),
-      transparent 60%
-    );
-  
-    opacity: 0.25;
-    filter: blur(22px);
-  }
+  content: "";
+  position: absolute;
+  inset: -2px;
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0;
+  filter: blur(18px);
+  transition: opacity 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  z-index: 0;
+}
+
+
+
   
   /* Subtle noise */
   .projectCard::after {
@@ -143,10 +145,19 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-  
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
-    opacity: 0.06;
+    border-radius: inherit;
+    opacity: 0;
     mix-blend-mode: overlay;
+
+    /* Mouse highlight ambient light */
+    background: radial-gradient(
+      300px 200px at var(--mx) var(--my),
+      rgba(59, 130, 246, 0.36),
+      transparent 58%
+    );
+    filter: blur(14px);
+    transition: opacity 180ms ease;
+    z-index: 0;
   }
   
   .projectMedia,
@@ -155,6 +166,17 @@
     z-index: 1;
   }
   
+  .projectCard:hover::after {
+    opacity: 1;
+  }
+
+  @media (hover: none) {
+    .projectCard::after {
+      display: none;
+    }
+  }
+  
+
   /* Featured offset */
   .projectCard--featured {
     min-height: 560px;
@@ -208,6 +230,9 @@
     .projectCard:hover,
     .projectCard--featured:hover {
       transform: none;
+      transition: none;
+    }
+    .projectCard::before {
       transition: none;
     }
   }
