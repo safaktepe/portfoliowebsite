@@ -1,15 +1,18 @@
-import "../styles/projects.css";
 import type React from "react";
+import { useEffect, useRef } from "react";
+
+import "../styles/projects.css";
 import bedtimeImg from "../assets/bedtime-stories.png";
 
-type SmallProjectProps = {
-  imageSrc: string;
+type ProjectCardProps = {
   href: string;
+  imageSrc: string;
   title: string;
   description: string;
+  featured?: boolean;
 };
 
-function handleCardMouseMove(e: React.MouseEvent<HTMLElement>) {
+function setPointerVars(e: React.MouseEvent<HTMLElement>) {
   const el = e.currentTarget;
   const r = el.getBoundingClientRect();
   const x = e.clientX - r.left;
@@ -19,43 +22,40 @@ function handleCardMouseMove(e: React.MouseEvent<HTMLElement>) {
   el.style.setProperty("--my", `${y}px`);
 }
 
-function handleCardMouseLeave(e: React.MouseEvent<HTMLElement>) {
+function clearPointerVars(e: React.MouseEvent<HTMLElement>) {
   const el = e.currentTarget;
   el.style.removeProperty("--mx");
   el.style.removeProperty("--my");
 }
 
+function navigateTo(href: string) {
+  window.location.href = href;
+}
 
-function SmallProjectCard({ href, imageSrc, title, description }: SmallProjectProps) {
-  const go = () => {
-    window.location.href = href;
-  };
+function ProjectCard({ href, imageSrc, title, description, featured }: ProjectCardProps) {
+  const className = featured ? "projectCard projectCard--featured" : "projectCard";
 
   return (
     <article
-      className="projectCard"
+      className={className}
       role="link"
       tabIndex={0}
-      onClick={go}
+      onClick={() => navigateTo(href)}
       onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") go();
+        if (e.key === "Enter" || e.key === " ") navigateTo(href);
       }}
-      onMouseMove={handleCardMouseMove}
-      onMouseLeave={handleCardMouseLeave}
+      onMouseMove={setPointerVars}
+      onMouseLeave={clearPointerVars}
     >
       <figure className="projectMedia">
-      <img src={bedtimeImg} alt="Bedtime Stories preview" />
+        <img src={imageSrc} alt={`${title} preview`} />
       </figure>
 
       <div className="projectBody">
         <h3 className="projectTitle">{title}</h3>
         <p className="projectDesc">{description}</p>
 
-        <a
-          href={href}
-          className="projectCta"
-          onClick={(e) => e.stopPropagation()}
-        >
+        <a href={href} className="projectCta" onClick={(e) => e.stopPropagation()}>
           View Case Study <span aria-hidden="true">↗</span>
         </a>
       </div>
@@ -63,69 +63,78 @@ function SmallProjectCard({ href, imageSrc, title, description }: SmallProjectPr
   );
 }
 
+function useShellParallax<T extends HTMLElement>(ref: React.RefObject<T | null>) {
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
 
-function FeaturedProjectCard() {
-  const href = "/projects/bedtime-stories"; //  placeholder for now
-  const go = () => {
-    window.location.href = href;
-  };
+    const prefersReducedMotion =
+      window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
 
-  return (
-    <article
-      className="projectCard projectCard--featured"
-      role="link"
-      tabIndex={0}
-      onClick={go}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") go();
-      }}
-      onMouseMove={handleCardMouseMove}
-      onMouseLeave={handleCardMouseLeave}
-    >
-      <figure className="projectMedia">
-        <img src={bedtimeImg} alt="Bedtime Stories preview" />
-      </figure>
+    if (prefersReducedMotion) return;
 
-      <div className="projectBody">
-        <h3 className="projectTitle">Bedtime Stories</h3>
-        <p className="projectDesc">
-          An app concept for children featuring soothing short stories to make the
-          bedtime routine calmer and more enjoyable.
-        </p>
+    let raf = 0;
 
-        <a
-          href={href}
-          className="projectCta"
-          onClick={(e) => e.stopPropagation()}
-        >
-          View Case Study <span aria-hidden="true">↗</span>
-        </a>
-      </div>
-    </article>
-  );
+    const update = () => {
+      raf = 0;
+
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight || 1;
+
+      const t = (rect.top + rect.height * 0.5) / vh;
+      const centered = t - 0.5;
+      const clamped = Math.max(-0.5, Math.min(0.5, centered));
+
+      const y = clamped * -50; 
+      el.style.setProperty("--parallaxY", `${y.toFixed(2)}px`);
+    };
+
+    const onScroll = () => {
+      if (raf) return;
+      raf = window.requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) window.cancelAnimationFrame(raf);
+    };
+  }, [ref]);
 }
-
 
 export function ProjectsSection() {
+  const shellRef = useRef<HTMLDivElement | null>(null);
+  useShellParallax(shellRef);
+
   return (
     <section id="projects" className="projectsSection">
       <div className="projectsInner">
         <h2 className="projectsTitle">Featured Works</h2>
 
-        <div className="projectsShell">
+        <div className="projectsShell" ref={shellRef}>
           <div className="projectsGrid">
-            <SmallProjectCard
+            <ProjectCard
+              href="#projects"
               imageSrc="/vite.svg"
-              href="/projects/bedtime-stories"
               title="Bedtime Stories"
               description="Compact card layout: image on top, then title and description. Fixed size with reserved space for a future button."
             />
 
-            <FeaturedProjectCard />
+            <ProjectCard
+              href="#projects"
+              imageSrc={bedtimeImg}
+              title="Bedtime Stories"
+              description="An app concept for children featuring soothing short stories to make the bedtime routine calmer and more enjoyable."
+              featured
+            />
 
-            <SmallProjectCard
+            <ProjectCard
+              href="#projects"
               imageSrc="/vite.svg"
-              href="/projects/bedtime-stories"
               title="Calm Reader"
               description="Readable body copy with 1.6 line-height and a softer color for better contrast management."
             />

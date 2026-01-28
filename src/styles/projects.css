@@ -50,6 +50,9 @@
   }
   
   .projectsShell {
+    transform: translate3d(0, var(--parallaxY, 0px), 0);
+    will-change: transform;
+
     border-radius: 16px;
     padding: 100px;
   
