@@ -1,6 +1,6 @@
 import type React from "react";
 import { useEffect, useRef } from "react";
-
+import { useNavigate } from "react-router-dom";
 import "../styles/projects.css";
 import bedtimeImg from "../assets/bedtime-stories.png";
 
@@ -33,16 +33,25 @@ function navigateTo(href: string) {
 }
 
 function ProjectCard({ href, imageSrc, title, description, featured }: ProjectCardProps) {
+  const navigate = useNavigate();
   const className = featured ? "projectCard projectCard--featured" : "projectCard";
+
+  function go() {
+    if (href.startsWith("#")) {
+      window.location.hash = href;
+      return;
+    }
+    navigate(href);
+  }
 
   return (
     <article
       className={className}
       role="link"
       tabIndex={0}
-      onClick={() => navigateTo(href)}
+      onClick={go}
       onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") navigateTo(href);
+        if (e.key === "Enter" || e.key === " ") go();
       }}
       onMouseMove={setPointerVars}
       onMouseLeave={clearPointerVars}
@@ -55,13 +64,22 @@ function ProjectCard({ href, imageSrc, title, description, featured }: ProjectCa
         <h3 className="projectTitle">{title}</h3>
         <p className="projectDesc">{description}</p>
 
-        <a href={href} className="projectCta" onClick={(e) => e.stopPropagation()}>
+        <a
+          href={href}
+          className="projectCta"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            go();
+          }}
+        >
           View Case Study <span aria-hidden="true">↗</span>
         </a>
       </div>
     </article>
   );
 }
+
 
 function useShellParallax<T extends HTMLElement>(ref: React.RefObject<T | null>) {
   useEffect(() => {
@@ -118,14 +136,14 @@ export function ProjectsSection() {
         <div className="projectsShell" ref={shellRef}>
           <div className="projectsGrid">
             <ProjectCard
-              href="#projects"
+              href="/projects/bedtime-stories"
               imageSrc="/vite.svg"
               title="Bedtime Stories"
               description="Compact card layout: image on top, then title and description. Fixed size with reserved space for a future button."
             />
 
             <ProjectCard
-              href="#projects"
+              href="/projects/bedtime-stories"
               imageSrc={bedtimeImg}
               title="Bedtime Stories"
               description="An app concept for children featuring soothing short stories to make the bedtime routine calmer and more enjoyable."
@@ -133,7 +151,7 @@ export function ProjectsSection() {
             />
 
             <ProjectCard
-              href="#projects"
+              href="/projects/bedtime-stories"  
               imageSrc="/vite.svg"
               title="Calm Reader"
               description="Readable body copy with 1.6 line-height and a softer color for better contrast management."

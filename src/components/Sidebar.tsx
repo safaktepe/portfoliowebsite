@@ -1,3 +1,4 @@
+import { useLocation, useNavigate } from "react-router-dom";
 import { useMemo } from "react";
 import { smoothScrollTo } from "../lib/smoothScrollTo";
 import "../styles/sidebar.css";
@@ -22,8 +23,17 @@ type SidebarProps = {
 
 export function Sidebar({ activeId, onActiveChange, onNavLockChange }: SidebarProps) {
   const items = useMemo(() => navItems, []);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   function handleClick(id: string) {
+    // Detail sayfadaysak: landing'e dön, hash'i ekle
+    if (location.pathname !== "/") {
+      navigate(`/#${id}`);
+      return;
+    }
+
+    // Landing içindeysek: mevcut scroll mantığın
     const section = document.getElementById(id);
     if (!section) return;
 
