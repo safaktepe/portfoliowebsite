@@ -1,11 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { getProjectBySlug } from "../data/projects";
 import { MainLayout } from "../layouts/MainLayout";
-import "../styles/projectDetail.css";
-
-type ProjectWithOptionalNote = {
-  note?: string;
-};
+import "../styles/projectDetailV2.css";
 
 export function ProjectDetailPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -17,62 +13,117 @@ export function ProjectDetailPage() {
       onActiveSectionChange={() => {}}
       onNavLockChange={() => {}}
     >
-      <section className="pdWrap">
+      <div className="pd2">
         {!project ? (
-          <div className="pdCard">
-            <h1 className="pdTitle">Project not found</h1>
-            <p className="pdText">This URL might be outdated.</p>
-            <Link className="pdBack" to="/#projects">
+          <div className="pd2Card">
+            <h1 className="pd2Title">Project not found</h1>
+            <p className="pd2Muted">This URL might be outdated.</p>
+            <Link className="pd2Link" to="/#projects">
               ← Back to Projects
             </Link>
           </div>
         ) : (
           <>
-            {/* 1) HERO GLASS + overview */}
-            <article className="pdCard pdHero">
-              <h1 className="pdTitle">{project.title}</h1>
-              <p className="pdText">{project.subtitle}</p>
+            {/* HERO */}
+            <section className="pd2Hero">
+              <div className="pd2HeroLeft">
+                <div className="pd2Badge">
+                  <span className="pd2Dot" />
+                  {project.title}
+                </div>
 
-              <div className="pdChips">
-                {project.stack.map((t) => (
-                  <span key={t} className="pdChip">
-                    {t}
-                  </span>
-                ))}
+                <h1 className="pd2Heading">{project.title}</h1>
+                <p className="pd2Lead">{project.subtitle}</p>
+
+                <div className="pd2Actions">
+                  {project.links.map((l) => (
+                    <a
+                      key={l.href}
+                      className={
+                        l.label === "Live"
+                          ? "pd2Btn pd2BtnPrimary"
+                          : "pd2Btn"
+                      }
+                      href={l.href}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {l.label}
+                    </a>
+                  ))}
+                  <Link className="pd2Btn pd2BtnGhost" to="/#projects">
+                    Back to Projects
+                  </Link>
+                </div>
               </div>
 
-              <div className="pdLinks">
-                {project.links.map((l) => (
-                  <a key={l.href} className="pdLink" href={l.href} target="_blank" rel="noreferrer">
-                    {l.label}
-                  </a>
-                ))}
+              <div className="pd2HeroRight">
+                <div className="pd2Glow" />
+                <div className="pd2Phone">
+                  <div className="pd2Notch" />
+                  <img
+                    className="pd2PhoneImg"
+                    src={project.coverImage.src}
+                    alt={project.coverImage.alt}
+                  />
+                </div>
               </div>
-            </article>
+            </section>
 
-            {/* 2) NOTE   */}
-            {Boolean((project as ProjectWithOptionalNote).note) && (
-              <aside className="pdCard pdNote">
-                  {(project as ProjectWithOptionalNote).note}
-                  </aside>
-                  )}
+            {/* BENTO GRID (placeholder) */}
+            <section className="pd2Grid">
+              <article className="pd2Card">
+                <h3 className="pd2CardTitle">The Goal</h3>
+                <p className="pd2Muted">...</p>
+              </article>
 
-            <figure className="pdImage">
-              <img src={project.coverImage.src} alt={project.coverImage.alt} />
-            </figure>
+              <article className="pd2Card">
+                <h3 className="pd2CardTitle">The Approach</h3>
+                <p className="pd2Muted">...</p>
+              </article>
 
-            {/* 4) OTHER SECTIONS */}
-            <div className="pdGrid">
-              {project.sections.map((s) => (
-                <section key={s.title} className="pdCard">
-                  <h2 className="pdSectionTitle">{s.title}</h2>
-                  <p className="pdSectionText">{s.content}</p>
-                </section>
-              ))}
-            </div>
+              <article className="pd2Card pd2CardAccent">
+                <h3 className="pd2CardTitle">Performance</h3>
+                <p className="pd2Muted">...</p>
+              </article>
+
+              <article className="pd2Card pd2Span2">
+                <h3 className="pd2CardTitle">Technical Decisions</h3>
+                <p className="pd2Muted">...</p>
+              </article>
+
+              <article className="pd2Card">
+                <h3 className="pd2CardTitle">Challenges</h3>
+                <p className="pd2Muted">...</p>
+              </article>
+
+              <article className="pd2Card pd2Span3">
+                <h3 className="pd2CardTitle">What I’d Improve</h3>
+                <p className="pd2Muted">...</p>
+              </article>
+            </section>
+
+            {/* FOOTER */}
+            <footer className="pd2Footer">
+              <div>
+                <h3 className="pd2FooterTitle">Intrigued by this project?</h3>
+                <p className="pd2Muted">
+                  Let’s discuss how I can bring this expertise to your team.
+                </p>
+              </div>
+
+              <div className="pd2FooterActions">
+                <Link className="pd2Btn pd2BtnPrimary" to="/#contact">
+                  Get in Touch
+                </Link>
+                <Link className="pd2Btn" to="/#projects">
+                  Back to Projects
+                </Link>
+              </div>
+            </footer>
           </>
         )}
-      </section>
+      </div>
     </MainLayout>
   );
 }
