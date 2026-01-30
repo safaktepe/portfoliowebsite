@@ -1,6 +1,7 @@
 import type React from "react";
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+
 import "../styles/projects.css";
 import bedtimeImg from "../assets/bedtime-stories.png";
 
@@ -28,19 +29,11 @@ function clearPointerVars(e: React.MouseEvent<HTMLElement>) {
   el.style.removeProperty("--my");
 }
 
-function navigateTo(href: string) {
-  window.location.href = href;
-}
-
 function ProjectCard({ href, imageSrc, title, description, featured }: ProjectCardProps) {
   const navigate = useNavigate();
   const className = featured ? "projectCard projectCard--featured" : "projectCard";
 
   function go() {
-    if (href.startsWith("#")) {
-      window.location.hash = href;
-      return;
-    }
     navigate(href);
   }
 
@@ -80,7 +73,6 @@ function ProjectCard({ href, imageSrc, title, description, featured }: ProjectCa
   );
 }
 
-
 function useShellParallax<T extends HTMLElement>(ref: React.RefObject<T | null>) {
   useEffect(() => {
     const el = ref.current;
@@ -103,7 +95,7 @@ function useShellParallax<T extends HTMLElement>(ref: React.RefObject<T | null>)
       const centered = t - 0.5;
       const clamped = Math.max(-0.5, Math.min(0.5, centered));
 
-      const y = clamped * -50; 
+      const y = clamped * -50;
       el.style.setProperty("--parallaxY", `${y.toFixed(2)}px`);
     };
 
@@ -136,25 +128,25 @@ export function ProjectsSection() {
         <div className="projectsShell" ref={shellRef}>
           <div className="projectsGrid">
             <ProjectCard
-              href="/projects/bedtime-stories"
+              href="/projects/pokedex"
               imageSrc="/vite.svg"
-              title="Bedtime Stories"
-              description="Compact card layout: image on top, then title and description. Fixed size with reserved space for a future button."
+              title="Pokedex"
+              description="Fast search and clean detail views for Pokémon data."
             />
 
             <ProjectCard
               href="/projects/bedtime-stories"
               imageSrc={bedtimeImg}
               title="Bedtime Stories"
-              description="An app concept for children featuring soothing short stories to make the bedtime routine calmer and more enjoyable."
+              description="An app concept for children featuring soothing short stories to make bedtime calmer."
               featured
             />
 
             <ProjectCard
-              href="/projects/bedtime-stories"  
+              href="/projects/75-hard"
               imageSrc="/vite.svg"
-              title="Calm Reader"
-              description="Readable body copy with 1.6 line-height and a softer color for better contrast management."
+              title="75 Hard Tracker"
+              description="A minimal daily tracker with progress and history."
             />
           </div>
         </div>
