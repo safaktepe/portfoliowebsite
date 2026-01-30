@@ -69,11 +69,11 @@ export type ProjectSection = {
     {
       slug: "75-hard",
       title: "75 Hard Tracker",
-      subtitle: "A minimal daily tracker with progress and history.",
-      note: "The source code for this project is private due to commercial reasons. The app is live and generating revenue.",
+      subtitle: "iOS (Swift) app that helps people discipline themselves and become better both mentally and physically. It includes a hard challenge that lasts 75 days. There are 6 different tasks that users must complete every day. The user marks the completed task. The tasks are reset every evening at 00:00 and the day counter is incremented by 1.",
+      note: "⚠️ 🚨 Explore the complete details of my projects, including code and screenshots, by visiting my GitHub repository. Click here to explore!",
       kind: "standard",
       coverImage: {
-        src: "https://your-cf-domain.com/images/75hard.png",
+        src: "/src/assets/",
         alt: "75 Hard Tracker preview",
       },
       links: [

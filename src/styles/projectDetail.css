@@ -1,6 +1,6 @@
 /* Centered content area */
 .pdWrap {
-    max-width: 1060px;
+    max-width: 1150px;
     margin: 0 auto;
     padding: 18px 0 52px;
     display: flex;
@@ -40,6 +40,7 @@
   /* HERO (+ Overview ) */
   .pdHero {
     padding: 20px;
+    margin-top: 20px;
   }
   
   .pdTitle {
@@ -51,7 +52,9 @@
   }
   
   .pdText {
-    margin: 10px 0 0;
+    margin: 30px 0 30px;
+    padding-left: 8%;
+    padding-right: 8%;
     opacity: 0.78;
     line-height: 1.7;
     font-size: 17px;
@@ -109,7 +112,7 @@
       0 24px 60px rgba(0, 0, 0, 0.45);
     padding: 18px;
   
-    font-size: 14px;
+    font-size: 17px;
     line-height: 1.65;
     opacity: 0.78;
   }
