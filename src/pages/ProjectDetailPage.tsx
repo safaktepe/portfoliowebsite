@@ -3,6 +3,11 @@ import { getProjectBySlug } from "../data/projects";
 import { MainLayout } from "../layouts/MainLayout";
 import "../styles/projectDetailV2.css";
 
+type InterfaceImage = { src: string; alt: string };
+type ProjectWithOptionalInterfaceImages = {
+  interfaceImages?: InterfaceImage[];
+};
+
 export function ProjectDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const project = slug ? getProjectBySlug(slug) : undefined;
@@ -23,105 +28,167 @@ export function ProjectDetailPage() {
             </Link>
           </div>
         ) : (
-          <>
-            {/* HERO */}
-            <section className="pd2Hero">
-              <div className="pd2HeroLeft">
-                <div className="pd2Badge">
-                  <span className="pd2Dot" />
-                  {project.title}
-                </div>
+          (() => {
+            const p = project as ProjectWithOptionalInterfaceImages;
 
-                <h1 className="pd2Heading">{project.title}</h1>
-                <p className="pd2Lead">{project.subtitle}</p>
+            const interfaceImages =
+              p.interfaceImages && p.interfaceImages.length >= 3
+                ? p.interfaceImages
+                : [project.coverImage, project.coverImage, project.coverImage];
 
-                <div className="pd2Actions">
-                  {project.links.map((l) => (
-                    <a
-                      key={l.href}
-                      className={
-                        l.label === "Live"
-                          ? "pd2Btn pd2BtnPrimary"
-                          : "pd2Btn"
-                      }
-                      href={l.href}
-                      target="_blank"
-                      rel="noreferrer"
+            const shouldCenterRail = interfaceImages.length === 3;
+            const showRailControls = interfaceImages.length >= 4;
+
+            const sourceCodeLink = project.links.find((l) => l.label === "GitHub");
+
+            const scrollRail = (dir: -1 | 1) => {
+              const el = document.getElementById("pd2Rail");
+              if (!el) return;
+              el.scrollBy({ left: dir * 360, behavior: "smooth" });
+            };
+
+            return (
+              <>
+                {/* HERO */}
+                <section className="pd2Hero">
+                  <div className="pd2HeroLeft">
+                    <div className="pd2Badge">
+                      <span className="pd2Dot" />
+                      {project.title}
+                    </div>
+
+                    <h1 className="pd2Heading">{project.title}</h1>
+                    <p className="pd2Lead">{project.subtitle}</p>
+
+                    <div className="pd2Actions">
+                      {sourceCodeLink && (
+                        <a
+                          className="pd2Btn pd2BtnPrimary"
+                          href={sourceCodeLink.href}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          Source Code
+                        </a>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="pd2HeroRight">
+                    <div className="pd2Glow" />
+                    <div className="pd2Phone">
+                      <div className="pd2Notch" />
+                      <img
+                        className="pd2PhoneImg"
+                        src={project.coverImage.src}
+                        alt={project.coverImage.alt}
+                      />
+                    </div>
+                  </div>
+                </section>
+
+                {/* BENTO GRID */}
+                <section className="pd2Grid">
+                  <article className="pd2Card">
+                    <h3 className="pd2CardTitle">The Goal</h3>
+                    <p className="pd2Muted">{project.bento.goal}</p>
+                  </article>
+
+                  <article className="pd2Card">
+                    <h3 className="pd2CardTitle">The Approach</h3>
+                    <p className="pd2Muted">{project.bento.approach}</p>
+                  </article>
+
+                  <article className="pd2Card pd2CardAccent">
+                    <h3 className="pd2CardTitle">Performance</h3>
+                    <p className="pd2Muted">{project.bento.performance}</p>
+                  </article>
+
+                  <article className="pd2Card pd2Span2">
+                    <h3 className="pd2CardTitle">Technical Decisions</h3>
+                    <p className="pd2Muted">{project.bento.technicalDecisions}</p>
+                  </article>
+
+                  <article className="pd2Card">
+                    <h3 className="pd2CardTitle">Challenges</h3>
+                    <p className="pd2Muted">{project.bento.challenges}</p>
+                  </article>
+
+                  <article className="pd2Card pd2Span3">
+                    <h3 className="pd2CardTitle">What I’d Improve</h3>
+                    <p className="pd2Muted">{project.bento.improvements}</p>
+                  </article>
+                </section>
+
+                {/* PROJECT INTERFACE */}
+                <section className="pd2Interface">
+                  <div className="pd2InterfaceHead">
+                    <div>
+                      <h2 className="pd2H2">Project Interface</h2>
+                      <p className="pd2InterfaceSub">Immersive mobile app walkthrough</p>
+                    </div>
+
+                    {showRailControls && (
+                      <div className="pd2InterfaceNav">
+                        <button
+                          type="button"
+                          className="pd2Nav"
+                          aria-label="Scroll left"
+                          onClick={() => scrollRail(-1)}
+                        >
+                          ‹
+                        </button>
+                        <button
+                          type="button"
+                          className="pd2Nav"
+                          aria-label="Scroll right"
+                          onClick={() => scrollRail(1)}
+                        >
+                          ›
+                        </button>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="pd2InterfaceStage">
+                    <div
+                      id="pd2Rail"
+                      className="pd2Rail"
+                      data-centered={shouldCenterRail ? "true" : "false"}
                     >
-                      {l.label}
-                    </a>
-                  ))}
-                  <Link className="pd2Btn pd2BtnGhost" to="/#projects">
-                    Back to Projects
-                  </Link>
-                </div>
-              </div>
+                      {interfaceImages.map((img, idx) => (
+                        <div className="pd2RailItem" key={`${img.src}-${idx}`}>
+                          <div className="pd2Phone pd2PhoneSmall">
+                            <div className="pd2Notch" />
+                            <img className="pd2PhoneImg" src={img.src} alt={img.alt} />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </section>
 
-              <div className="pd2HeroRight">
-                <div className="pd2Glow" />
-                <div className="pd2Phone">
-                  <div className="pd2Notch" />
-                  <img
-                    className="pd2PhoneImg"
-                    src={project.coverImage.src}
-                    alt={project.coverImage.alt}
-                  />
-                </div>
-              </div>
-            </section>
+                {/* FOOTER */}
+                <footer className="pd2Footer">
+                  <div>
+                    <h3 className="pd2FooterTitle">Intrigued by this project?</h3>
+                    <p className="pd2Muted">
+                      Let’s discuss how I can bring this expertise to your team.
+                    </p>
+                  </div>
 
-            {/* BENTO GRID (placeholder) */}
-            <section className="pd2Grid">
-              <article className="pd2Card">
-                <h3 className="pd2CardTitle">The Goal</h3>
-                <p className="pd2Muted">...</p>
-              </article>
-
-              <article className="pd2Card">
-                <h3 className="pd2CardTitle">The Approach</h3>
-                <p className="pd2Muted">...</p>
-              </article>
-
-              <article className="pd2Card pd2CardAccent">
-                <h3 className="pd2CardTitle">Performance</h3>
-                <p className="pd2Muted">...</p>
-              </article>
-
-              <article className="pd2Card pd2Span2">
-                <h3 className="pd2CardTitle">Technical Decisions</h3>
-                <p className="pd2Muted">...</p>
-              </article>
-
-              <article className="pd2Card">
-                <h3 className="pd2CardTitle">Challenges</h3>
-                <p className="pd2Muted">...</p>
-              </article>
-
-              <article className="pd2Card pd2Span3">
-                <h3 className="pd2CardTitle">What I’d Improve</h3>
-                <p className="pd2Muted">...</p>
-              </article>
-            </section>
-
-            {/* FOOTER */}
-            <footer className="pd2Footer">
-              <div>
-                <h3 className="pd2FooterTitle">Intrigued by this project?</h3>
-                <p className="pd2Muted">
-                  Let’s discuss how I can bring this expertise to your team.
-                </p>
-              </div>
-
-              <div className="pd2FooterActions">
-                <Link className="pd2Btn pd2BtnPrimary" to="/#contact">
-                  Get in Touch
-                </Link>
-                <Link className="pd2Btn" to="/#projects">
-                  Back to Projects
-                </Link>
-              </div>
-            </footer>
-          </>
+                  <div className="pd2FooterActions">
+                    <Link className="pd2Btn pd2BtnPrimary" to="/#contact">
+                      Get in Touch
+                    </Link>
+                    <Link className="pd2Btn" to="/#projects">
+                      Back to Projects
+                    </Link>
+                  </div>
+                </footer>
+              </>
+            );
+          })()
         )}
       </div>
     </MainLayout>

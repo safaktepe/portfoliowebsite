@@ -6,19 +6,27 @@ export type ProjectSection = {
   export type Project = {
     slug: string;
     title: string;
+    interfaceImages?: Array<{ src: string; alt: string }>;
     subtitle: string;
-    note: string;
-  
+    note?: string;
     kind: "standard" | "featured"; 
     coverImage: {
       src: string; // Cloudflare URL
       alt: string;
     };
-  
     links: Array<{ label: "GitHub" | "Live"; href: string }>;
-    stack: string[];
-  
+    stack: string[];  
+    bento: {
+        goal: string;
+        approach: string;
+        performance: string;
+        technicalDecisions: string;
+        challenges: string;
+        improvements: string;
+      };
+      
     sections: ProjectSection[];
+    
   };
   
   export const projects: Project[] = [
@@ -28,6 +36,11 @@ export type ProjectSection = {
       subtitle: "Fast search and clean detail views for Pokémon data.",
       note: "The source code for this project is private due to commercial reasons. The app is live and generating revenue.",
       kind: "standard",
+      interfaceImages: [
+        { src: "/src/assets/s.png", alt: "..." },
+        { src: "/src/assets/s.png", alt: "..." },
+        { src: "/src/assets/s.png", alt: "..." },
+      ],      
       coverImage: {
         src: "/src/assets/s.png",
         alt: "Pokedex preview",
@@ -37,6 +50,14 @@ export type ProjectSection = {
         { label: "Live", href: "https://..." },
       ],
       stack: ["React", "TypeScript", "Vite"],
+      bento: {
+        goal: "Build a fast, distraction-free browsing experience with a clean list → detail flow.",
+        approach: "Keep state predictable, optimize search interactions, and design for clear loading/empty/error states.",
+        performance: "Minimize unnecessary rerenders during filtering and navigation to keep the UI responsive.",
+        technicalDecisions: "Type-safe API models, URL-driven detail routing, and reusable UI primitives to keep the codebase maintainable.",
+        challenges: "Balancing UX clarity with dense data while keeping the interface calm and readable.",
+        improvements: "Add caching, advanced filters, and accessibility refinements after validating the core experience."
+      },      
       sections: [
         {
           title: "Goal",
@@ -81,6 +102,14 @@ export type ProjectSection = {
         { label: "Live", href: "https://..." },
       ],
       stack: ["React", "TypeScript", "Vite"],
+      bento: {
+        goal: "Make daily tracking frictionless while preserving a sense of progress and consistency.",
+        approach: "Design a today-first flow with clear task completion and a simple mental model for repeat usage.",
+        performance: "Keep interactions instant by relying on local-first patterns and lightweight UI updates.",
+        technicalDecisions: "Simple state boundaries, predictable updates, and persistence that survives refreshes and device restarts.",
+        challenges: "Avoiding a cluttered UI while still supporting a 75-day timeline and repeatable daily habits.",
+        improvements: "Add optional streaks/stats and export features once the daily UX is validated."
+      },      
       sections: [
         {
           title: "Goal",
@@ -124,6 +153,14 @@ export type ProjectSection = {
           { label: "Live", href: "https://..." },
         ],
         stack: ["React", "TypeScript", "Vite"],
+        bento: {
+            goal: "Create a night-friendly interface with strong readability, minimal distractions, and a simple story discovery flow.",
+            approach: "Use calm typography and spacing, then drive the experience through a clean list → reader journey.",
+            performance: "Prioritize smooth transitions and keep the reader lightweight to avoid visual/interaction noise.",
+            technicalDecisions: "Reusable UI primitives, route-driven screens, and a structure that keeps UI and content concerns separated.",
+            challenges: "Staying visually soft while maintaining accessible contrast and a clear hierarchy for kids and parents.",
+            improvements: "Add filters (age/length), reading preferences (font size), and better content organization once the core UX is validated."
+          },          
         sections: [
           {
             title: "Goal",

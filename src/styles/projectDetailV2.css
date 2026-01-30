@@ -4,7 +4,6 @@
     padding: 28px 0 80px;
     display: flex;
     flex-direction: column;
-    gap: 56px;
   }
   
   .pd2Card {
@@ -15,7 +14,9 @@
     box-shadow:
       0 0 0 1px rgba(255, 255, 255, 0.04) inset,
       0 28px 80px rgba(0, 0, 0, 0.45);
-    padding: 20px;
+    padding: 26px 22px;
+    display: flex;
+    flex-direction: column;
   }
   
   .pd2CardAccent {
@@ -32,14 +33,23 @@
   
   .pd2CardTitle {
     margin: 0;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 650;
+    letter-spacing: -0.01em;
   }
   
   .pd2Muted {
-    margin: 10px 0 0;
+    margin: 12px 0 0;
     opacity: 0.78;
-    line-height: 1.7;
+    line-height: 1.78;
+    font-size: 15px;
+    max-width: 56ch;
+    flex-grow: 1;
+  }
+  
+  .pd2Span3 .pd2Muted,
+  .pd2Span2 .pd2Muted {
+    max-width: none;
   }
   
   .pd2Link {
@@ -60,7 +70,7 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    padding: 8px 12px;
+    padding: 8px 80px;
     border-radius: 999px;
     background: rgba(96, 165, 250, 0.10);
     box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.16) inset;
@@ -121,8 +131,16 @@
   }
   
   .pd2BtnPrimary {
-    background: rgba(96, 165, 250, 0.18);
-    box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.22) inset;
+    background: linear-gradient(
+      135deg,
+      rgba(96, 165, 250, 0.9),
+      rgba(59, 130, 246, 0.9)
+    );
+    box-shadow:
+      0 0 0 1px rgba(96, 165, 250, 0.35) inset,
+      0 10px 30px rgba(96, 165, 250, 0.35);
+    color: #0b1220;
+    font-weight: 600;
   }
   
   .pd2BtnGhost {
@@ -182,18 +200,11 @@
   .pd2Grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+    gap: 22px;
   }
   
   .pd2Span2 { grid-column: span 2; }
   .pd2Span3 { grid-column: span 3; }
-  
-  .pd2CarouselHead {
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-    margin-bottom: 18px;
-  }
   
   .pd2H2 {
     margin: 0;
@@ -201,12 +212,82 @@
     letter-spacing: -0.02em;
   }
   
+  /* Project Interface */
+  .pd2Interface {
+    display: flex;
+    flex-direction: column;
+    gap: 18px; /* 40 -> 18 */
+  }
+  
+  .pd2InterfaceHead {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  
+  .pd2InterfaceSub {
+    margin: 10px 0 0;
+    opacity: 0.78;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  
+  .pd2InterfaceNav {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .pd2Nav {
+    width: 42px;
+    height: 42px;
+    border-radius: 999px;
+    border: 0;
+    cursor: pointer;
+    line-height: 0;
+    padding-bottom: 4px;
+  
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+      0 20px 50px rgba(0, 0, 0, 0.45);
+  
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 22px;
+    line-height: 1;
+    display: grid;
+    place-items: center;
+  }
+
+  .pd2Nav:hover {
+    background: rgba(255, 255, 255, 0.10);
+    transform: translateY(-1px);
+  }
+  
   .pd2Rail {
     display: flex;
     gap: 18px;
     overflow-x: auto;
-    padding-bottom: 12px;
+    padding: 4px 56px 12px 0;
     scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .pd2InterfaceStage {
+    overflow: hidden;
+  }
+  
+  .pd2Rail::-webkit-scrollbar {
+    display: none; 
+  }
+  
+  .pd2Rail[data-centered="true"] {
+    justify-content: space-between;
+    padding-right: 0;
+    width: 94%;
   }
   
   .pd2RailItem {
@@ -248,5 +329,27 @@
     .pd2Span2, .pd2Span3 {
       grid-column: span 1;
     }
+  }
+  
+  /* Rail image hover – subtle zoom */
+.pd2RailItem {
+    transition: transform 220ms ease;
+  }
+  
+  .pd2RailItem .pd2Phone {
+    overflow: hidden; 
+  }
+  
+  .pd2RailItem .pd2PhoneImg {
+    transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+  }
+  
+  .pd2RailItem:hover .pd2PhoneImg {
+    transform: scale(1.06);
+  }
+  
+  .pd2RailItem:hover {
+    transform: translateY(-4px);
   }
   
