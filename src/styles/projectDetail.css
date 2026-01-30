@@ -1,20 +1,21 @@
+/* Centered content area */
 .pdWrap {
-    max-width: 860px;
+    max-width: 1060px;
     margin: 0 auto;
-    padding: 18px 0 48px;
+    padding: 18px 0 52px;
     display: flex;
     flex-direction: column;
     gap: 18px;
   }
   
-  
-  
+  /* Top row (back link) */
   .pdTopRow {
     display: flex;
-    justify-content: space-between;
     align-items: baseline;
+    justify-content: flex-start;
   }
   
+  /* Back link */
   .pdBack {
     text-decoration: none;
     color: rgba(255, 255, 255, 0.85);
@@ -24,12 +25,7 @@
     color: rgba(255, 255, 255, 0.95);
   }
   
-  .pdSlug {
-    font-size: 13px;
-    opacity: 0.55;
-  }
-  
-  /* Glass card */
+  /* Base glass card */
   .pdCard {
     border-radius: 18px;
     background: rgba(255, 255, 255, 0.06);
@@ -41,35 +37,34 @@
     padding: 18px;
   }
   
+  /* HERO (+ Overview ) */
   .pdHero {
-    padding: 18px;
-  }
-  
-  .pdHeroGrid {
-    display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: 18px;
-    align-items: start;
+    padding: 20px;
   }
   
   .pdTitle {
     margin: 0;
-    font-size: 28px;
+    font-size: 56px;
     font-weight: 650;
     letter-spacing: -0.2px;
+    text-align: center;
   }
   
   .pdText {
     margin: 10px 0 0;
     opacity: 0.78;
-    line-height: 1.65;
+    line-height: 1.7;
+    font-size: 17px;
+    text-align: center;
   }
   
+  /* Chips (tech stack) */
   .pdChips {
     margin-top: 14px;
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+    justify-content: center;
   }
   
   .pdChip {
@@ -79,13 +74,16 @@
     box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04) inset;
     font-size: 13px;
     opacity: 0.92;
+    justify-content: center;
   }
   
+  /* Links (GitHub / Live) */
   .pdLinks {
     margin-top: 14px;
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
+    justify-content: center;
   }
   
   .pdLink {
@@ -97,20 +95,42 @@
     box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.16) inset;
   }
   
-  .pdMedia {
+  .pdLink:hover {
+    background: rgba(96, 165, 250, 0.14);
+  }
+  
+  /* NOTE GLASS (optional) */
+  .pdNote {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+      0 24px 60px rgba(0, 0, 0, 0.45);
+    padding: 18px;
+  
+    font-size: 14px;
+    line-height: 1.65;
+    opacity: 0.78;
+  }
+  
+  /* IMAGE */
+  .pdImage {
     margin: 0;
     border-radius: 16px;
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.04);
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+    background: rgba(255, 255, 255, 0.03);
+    box-shadow:
+      0 24px 60px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.04) inset;
   }
   
-  .pdMedia img {
-    display: block;
+  .pdImage img {
     width: 100%;
-    height: auto;
+    display: block;
   }
   
+  /* Sections */
   .pdGrid {
     display: grid;
     gap: 14px;
@@ -127,44 +147,14 @@
     margin: 10px 0 0;
     opacity: 0.8;
     line-height: 1.7;
+    font-size: 15px;
   }
   
+  /* Small screens */
   @media (max-width: 900px) {
-    .pdHeroGrid {
-      grid-template-columns: 1fr;
+    .pdWrap {
+      max-width: 100%;
+      padding: 14px 0 42px;
     }
-  }
-  
-  .pdSubtitle {
-    margin: 10px 0 0;
-    opacity: 0.78;
-    line-height: 1.65;
-  }
-  
-  .pdNote {
-    border-radius: 14px;
-    background: rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    padding: 14px 16px;
-    font-size: 14px;
-    line-height: 1.6;
-    opacity: 0.78;
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.03) inset;
-  }
-  
-  .pdImage {
-    margin: 0;
-    border-radius: 16px;
-    overflow: hidden;
-    background: rgba(255, 255, 255, 0.03);
-    box-shadow:
-      0 24px 60px rgba(0, 0, 0, 0.5),
-      0 0 0 1px rgba(255, 255, 255, 0.04) inset;
-  }
-  
-  .pdImage img {
-    width: 100%;
-    display: block;
   }
   

@@ -50,12 +50,12 @@ export function ProjectDetailPage() {
               </div>
             </article>
 
-            {/* 2) NOTE GLASS  */}
+            {/* 2) NOTE   */}
             {Boolean((project as ProjectWithOptionalNote).note) && (
-              <aside className="pdNote">
-                {(project as ProjectWithOptionalNote).note}
-              </aside>
-            )}
+              <aside className="pdCard pdNote">
+                  {(project as ProjectWithOptionalNote).note}
+                  </aside>
+                  )}
 
             <figure className="pdImage">
               <img src={project.coverImage.src} alt={project.coverImage.alt} />

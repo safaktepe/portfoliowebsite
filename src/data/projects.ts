@@ -7,8 +7,9 @@ export type ProjectSection = {
     slug: string;
     title: string;
     subtitle: string;
+    note: string;
   
-    kind: "standard" | "featured"; // featured'ı şimdilik kullanmayacağız
+    kind: "standard" | "featured"; 
     coverImage: {
       src: string; // Cloudflare URL
       alt: string;
@@ -25,6 +26,7 @@ export type ProjectSection = {
       slug: "pokedex",
       title: "Pokedex",
       subtitle: "Fast search and clean detail views for Pokémon data.",
+      note: "The source code for this project is private due to commercial reasons. The app is live and generating revenue.",
       kind: "standard",
       coverImage: {
         src: "/src/assets/s.png",
@@ -36,11 +38,6 @@ export type ProjectSection = {
       ],
       stack: ["React", "TypeScript", "Vite"],
       sections: [
-        {
-          title: "Overview",
-          content:
-            "A Pokedex-style app focused on fast browsing, search, and a clean list → detail flow.",
-        },
         {
           title: "Goal",
           content:
@@ -73,6 +70,7 @@ export type ProjectSection = {
       slug: "75-hard",
       title: "75 Hard Tracker",
       subtitle: "A minimal daily tracker with progress and history.",
+      note: "The source code for this project is private due to commercial reasons. The app is live and generating revenue.",
       kind: "standard",
       coverImage: {
         src: "https://your-cf-domain.com/images/75hard.png",
@@ -84,11 +82,6 @@ export type ProjectSection = {
       ],
       stack: ["React", "TypeScript", "Vite"],
       sections: [
-        {
-          title: "Overview",
-          content:
-            "A lightweight tracker for the 75 Hard challenge, designed for daily use without visual noise.",
-        },
         {
           title: "Goal",
           content:
@@ -120,7 +113,8 @@ export type ProjectSection = {
         slug: "bedtime-stories",
         title: "Bedtime Stories",
         subtitle: "A calming bedtime storytelling experience for children.",
-        kind: "featured", // şimdilik sadece label; UI farkı yapmıyoruz
+        note: "The source code for this project is private due to commercial reasons. The app is live and generating revenue.",
+        kind: "featured", 
         coverImage: {
           src: "https://your-cf-domain.com/images/bedtime-stories.png",
           alt: "Bedtime Stories preview",
@@ -131,11 +125,6 @@ export type ProjectSection = {
         ],
         stack: ["React", "TypeScript", "Vite"],
         sections: [
-          {
-            title: "Overview",
-            content:
-              "A concept app designed to make bedtime calmer with short, soothing stories and a low-stimulation reading experience.",
-          },
           {
             title: "Goal",
             content:
