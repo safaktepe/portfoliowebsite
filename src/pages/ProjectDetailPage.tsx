@@ -1,4 +1,5 @@
 import { Link, useParams } from "react-router-dom";
+import { useEffect } from "react";
 import { getProjectBySlug } from "../data/projects";
 import { MainLayout } from "../layouts/MainLayout";
 import "../styles/projectDetailV2.css";
@@ -12,6 +13,34 @@ type ProjectWithOptionalInterfaceImages = {
 export function ProjectDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const project = slug ? getProjectBySlug(slug) : undefined;
+
+  // Subtle cursor-following ambient on cards
+  useEffect(() => {
+    const cards = Array.from(document.querySelectorAll<HTMLElement>(".pd2Card"));
+    if (!cards.length) return;
+
+    const onPointerMove = (e: Event) => {
+      const pe = e as PointerEvent;
+      const el = pe.currentTarget as HTMLElement;
+      const r = el.getBoundingClientRect();
+      const x = pe.clientX - r.left;
+      const y = pe.clientY - r.top;
+      el.style.setProperty("--mx", `${x}px`);
+      el.style.setProperty("--my", `${y}px`);
+    };
+
+    cards.forEach((el) => {
+      el.addEventListener("pointermove", onPointerMove, { passive: true } as AddEventListenerOptions);
+      el.addEventListener("pointerenter", onPointerMove, { passive: true } as AddEventListenerOptions);
+    });
+
+    return () => {
+      cards.forEach((el) => {
+        el.removeEventListener("pointermove", onPointerMove as EventListener);
+        el.removeEventListener("pointerenter", onPointerMove as EventListener);
+      });
+    };
+  }, []);
 
   return (
     <MainLayout
