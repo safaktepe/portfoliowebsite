@@ -2,6 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import { getProjectBySlug } from "../data/projects";
 import { MainLayout } from "../layouts/MainLayout";
 import "../styles/projectDetailV2.css";
+import goalIcon from "../assets/goal_icon.png";
 
 type InterfaceImage = { src: string; alt: string };
 type ProjectWithOptionalInterfaceImages = {
@@ -39,7 +40,9 @@ export function ProjectDetailPage() {
             const shouldCenterRail = interfaceImages.length === 3;
             const showRailControls = interfaceImages.length >= 4;
 
-            const sourceCodeLink = project.links.find((l) => l.label === "GitHub");
+            const sourceCodeLink = project.links.find(
+              (l) => l.label === "GitHub"
+            );
 
             const scrollRail = (dir: -1 | 1) => {
               const el = document.getElementById("pd2Rail");
@@ -90,12 +93,22 @@ export function ProjectDetailPage() {
                 {/* BENTO GRID */}
                 <section className="pd2Grid">
                   <article className="pd2Card">
-                    <h3 className="pd2CardTitle">The Goal</h3>
+                    <div className="pd2CardHead pd2CardHead--stack">
+                      <span className="pd2CardIconWrap" aria-hidden="true">
+                        <img className="pd2CardIcon" src={goalIcon} alt="" />
+                      </span>
+                      <h3 className="pd2CardTitle">The Goal</h3>
+                    </div>
                     <p className="pd2Muted">{project.bento.goal}</p>
                   </article>
 
                   <article className="pd2Card">
-                    <h3 className="pd2CardTitle">The Approach</h3>
+                    <div className="pd2CardHead pd2CardHead--stack">
+                      <span className="pd2CardIconWrap" aria-hidden="true">
+                        <img className="pd2CardIcon" src={goalIcon} alt="" />
+                      </span>
+                      <h3 className="pd2CardTitle">The Approach</h3>
+                    </div>
                     <p className="pd2Muted">{project.bento.approach}</p>
                   </article>
 
@@ -104,9 +117,16 @@ export function ProjectDetailPage() {
                     <p className="pd2Muted">{project.bento.performance}</p>
                   </article>
 
-                  <article className="pd2Card pd2Span2">
-                    <h3 className="pd2CardTitle">Technical Decisions</h3>
-                    <p className="pd2Muted">{project.bento.technicalDecisions}</p>
+                  <article className="pd2Card pd2Span2 pd2RowTight">
+                    <div className="pd2CardHead pd2CardHead--row">
+                      <span className="pd2CardIconWrap" aria-hidden="true">
+                        <img className="pd2CardIcon" src={goalIcon} alt="" />
+                      </span>
+                      <h3 className="pd2CardTitle">Technical Decisions</h3>
+                    </div>
+                    <p className="pd2Muted">
+                      {project.bento.technicalDecisions}
+                    </p>
                   </article>
 
                   <article className="pd2Card">
@@ -114,8 +134,13 @@ export function ProjectDetailPage() {
                     <p className="pd2Muted">{project.bento.challenges}</p>
                   </article>
 
-                  <article className="pd2Card pd2Span3">
-                    <h3 className="pd2CardTitle">What I’d Improve</h3>
+                  <article className="pd2Card pd2Span3 pd2RowTight">
+                    <div className="pd2CardHead pd2CardHead--row">
+                      <span className="pd2CardIconWrap" aria-hidden="true">
+                        <img className="pd2CardIcon" src={goalIcon} alt="" />
+                      </span>
+                      <h3 className="pd2CardTitle">What I’d Improve</h3>
+                    </div>
                     <p className="pd2Muted">{project.bento.improvements}</p>
                   </article>
                 </section>
@@ -125,7 +150,9 @@ export function ProjectDetailPage() {
                   <div className="pd2InterfaceHead">
                     <div>
                       <h2 className="pd2H2">Project Interface</h2>
-                      <p className="pd2InterfaceSub">Immersive mobile app walkthrough</p>
+                      <p className="pd2InterfaceSub">
+                        Immersive mobile app walkthrough
+                      </p>
                     </div>
 
                     {showRailControls && (
@@ -160,7 +187,11 @@ export function ProjectDetailPage() {
                         <div className="pd2RailItem" key={`${img.src}-${idx}`}>
                           <div className="pd2Phone pd2PhoneSmall">
                             <div className="pd2Notch" />
-                            <img className="pd2PhoneImg" src={img.src} alt={img.alt} />
+                            <img
+                              className="pd2PhoneImg"
+                              src={img.src}
+                              alt={img.alt}
+                            />
                           </div>
                         </div>
                       ))}
@@ -171,7 +202,9 @@ export function ProjectDetailPage() {
                 {/* FOOTER */}
                 <footer className="pd2Footer">
                   <div>
-                    <h3 className="pd2FooterTitle">Intrigued by this project?</h3>
+                    <h3 className="pd2FooterTitle">
+                      Intrigued by this project?
+                    </h3>
                     <p className="pd2Muted">
                       Let’s discuss how I can bring this expertise to your team.
                     </p>

@@ -8,16 +8,20 @@
   
   .pd2Card {
     border-radius: 18px;
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+  
+    background: rgba(255, 255, 255, 0.025);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+  
     box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.04) inset,
-      0 28px 80px rgba(0, 0, 0, 0.45);
+      0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+      0 30px 90px rgba(0, 0, 0, 0.55);
+  
     padding: 26px 22px;
     display: flex;
     flex-direction: column;
   }
+  
   
   .pd2CardAccent {
     background: rgba(96, 165, 250, 0.08);
@@ -38,6 +42,75 @@
     letter-spacing: -0.01em;
   }
   
+  .pd2CardHead {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .pd2CardHead {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .pd2CardHead--stack {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    margin-top: -14px;
+  }
+
+  .pd2CardHead--row {
+    flex-direction: row;
+    align-items: center;
+    gap: 6px; 
+  }
+
+  .pd2RowTight .pd2CardHead--row {
+    gap: 2px;
+  }
+  .pd2RowTight .pd2CardHead--row .pd2CardTitle {
+    transform: translateX(-18px);
+  }
+  .pd2RowTight .pd2CardHead--row .pd2CardIcon {
+    transform: translateX(-12px); 
+  }
+  .pd2RowTight .pd2CardHead--row + .pd2Muted,
+  .pd2RowTight .pd2Muted {
+    margin-top: 6px; /* bringing text closer to header */
+  }
+  
+  .pd2CardIconWrap {
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    display: block;
+  }
+    
+  .pd2CardIcon {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    opacity: 0.9;
+    transform: none;
+    display: block;
+    margin: 0px;
+  }
+
+  .pd2CardHead--stack .pd2CardIconWrap { margin-left: 0; }
+  .pd2CardHead--stack .pd2CardIcon {
+    /* Visually compensate for transparent padding inside the asset */
+    transform: translateX(-18px);
+  }
+
+  /* Nudge the row-style header icon slightly left for balance */
+  .pd2CardHead--row .pd2CardIcon {
+    transform: translateX(-12px);
+  }
+
   .pd2Muted {
     margin: 12px 0 0;
     opacity: 0.78;
@@ -45,6 +118,10 @@
     font-size: 15px;
     max-width: 56ch;
     flex-grow: 1;
+  }
+
+  .pd2CardHead--stack + .pd2Muted {
+    margin-top: 8px;
   }
   
   .pd2Span3 .pd2Muted,
@@ -155,9 +232,9 @@
   
   .pd2Glow {
     position: absolute;
-    inset: -80px -80px -80px -80px;
-    background: radial-gradient(circle at 30% 30%, rgba(96,165,250,0.22), transparent 55%);
-    filter: blur(40px);
+    inset: -24px -120px -800px -8px;
+    background: radial-gradient(circle at 30% 30%, rgba(96,165,250,0.22), transparent 65%);
+    filter: blur(90px);
     z-index: 0;
   }
   
@@ -216,7 +293,7 @@
   .pd2Interface {
     display: flex;
     flex-direction: column;
-    gap: 18px; /* 40 -> 18 */
+    gap: 18px; 
   }
   
   .pd2InterfaceHead {
