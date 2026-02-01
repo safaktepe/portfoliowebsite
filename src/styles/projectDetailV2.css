@@ -138,7 +138,6 @@
 
   .pd2CardHead--stack .pd2CardIconWrap { margin-left: 0; }
   .pd2CardHead--stack .pd2CardIcon {
-    /* Visually compensate for transparent padding inside the asset */
     transform: translateX(-18px);
   }
 
@@ -180,9 +179,11 @@
   }
   
   .pd2Badge {
+    position: relative; 
     display: inline-flex;
     align-items: center;
     gap: 10px;
+    z-index: 2;
     padding: 8px 80px;
     border-radius: 999px;
     background: rgba(96, 165, 250, 0.10);
@@ -194,6 +195,29 @@
     opacity: 0.95;
   }
   
+  .pd2Badge::after {
+    content: "";
+    position: absolute;
+    left: 8%;
+    right: 8%;
+    bottom: -14px;
+    height: 26px;
+  
+    background: radial-gradient(
+      ellipse at center,
+      rgba(96, 165, 250, 0.55),
+      transparent 72%
+    );
+  
+    filter: blur(14px);
+    opacity: 1;
+    pointer-events: none;
+  
+    z-index: 1;              
+    mix-blend-mode: screen;  
+  }
+        
+    
   .pd2Dot {
     width: 8px;
     height: 8px;
@@ -246,17 +270,113 @@
   }
   
   .pd2BtnPrimary {
-    background: linear-gradient(
-      135deg,
-      rgba(96, 165, 250, 0.9),
-      rgba(59, 130, 246, 0.9)
-    );
-    box-shadow:
-      0 0 0 1px rgba(96, 165, 250, 0.35) inset,
-      0 10px 30px rgba(96, 165, 250, 0.35);
-    color: #0b1220;
+    height: 56px; /* pill height */
+    padding: 0 10px 0 18px; /* space for text + right pill */
+    color: #ffffff;
     font-weight: 600;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+      0 12px 30px rgba(0, 0, 0, 0.45);
+    gap: 14px;
+    position: relative;
+    z-index: 0;
+    overflow: visible;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
   }
+
+  .pd2BtnPrimary:hover {
+    background: rgba(255, 255, 255, 0.10);
+    transform: scale(1.03);
+    box-shadow:
+      0 14px 36px rgba(0, 0, 0, 0.50),
+      0 0 0 1px rgba(255, 255, 255, 0.10) inset,
+      0 22px 48px rgba(96, 165, 250, 0.20);
+  }
+
+  .pd2BtnPrimary:active {
+    transform: scale(1.02);
+    box-shadow:
+      0 8px 22px rgba(0, 0, 0, 0.38),
+      0 0 0 1px rgba(255, 255, 255, 0.12) inset,
+      0 18px 42px rgba(96, 165, 250, 0.18);
+  }
+
+  /* Ambient glow under the primary button (glass look) */
+  .pd2BtnPrimary::before {
+    content: "";
+    position: absolute;
+    left: 8%;
+    right: 8%;
+    bottom: -10px;
+    height: 22px;
+    background: radial-gradient(ellipse at center, rgba(96, 165, 250, 0.55), transparent 72%);
+    filter: blur(14px);
+    opacity: 1;
+    pointer-events: none;
+    z-index: -1; /* sit under the button */
+    mix-blend-mode: screen;
+  }
+
+  /* CTA label (left) */
+  .pd2CtaText {
+    font-size: 16px;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+
+  /* Right capsule "Go" */
+  .pd2CtaGo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 34px; /* smaller capsule */
+    min-width: 48px;
+    padding: 0 12px; /* tighter sides */
+    border-radius: 999px;
+    background: #0a84ff; /* revert to previous blue */
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.08) inset,
+      0 8px 20px rgba(0,0,0,0.35);
+  }
+  .pd2BtnPrimary:hover .pd2CtaGo { background: #0b7df0; }
+
+  /* Mouse-following ambient highlight on Go capsule */
+  .pd2CtaGo::after {
+    content: "";
+    position: absolute;
+    inset: -12px;
+    pointer-events: none;
+    background: radial-gradient(120px 120px at var(--mx, 50%) var(--my, 50%), rgba(96, 165, 250, 0.24), transparent 60%);
+    opacity: var(--hoverAmbientOpacity, 0);
+    transition: opacity 160ms ease;
+    mix-blend-mode: screen;
+    filter: blur(8px);
+    z-index: 0;
+  }
+  .pd2CtaGo:hover { --hoverAmbientOpacity: 1; }
+
+  .pd2BtnIcon {
+    width: 18px;
+    height: 18px;
+    display: block;
+    flex-shrink: 0;
+    opacity: 0.9;
+  }
+
+  /* Border glow animation removed as requested */
+
+  /* Removed moving border light effect per request */
   
   .pd2BtnGhost {
     background: transparent;
@@ -342,10 +462,56 @@
   
   /* Project Interface */
   .pd2Interface {
+    position: relative;          
+    z-index: 0;                  
     display: flex;
     flex-direction: column;
-    gap: 18px; 
+    gap: 18px;
+    isolation: isolate;
   }
+    
+
+  /* Ambient light */
+  .pd2Interface::before {
+    content: "";
+    position: absolute;
+    inset: -120px -80px -220px -120px;
+    pointer-events: none;
+  
+    background:
+      radial-gradient(
+        900px 520px at 18% 38%,
+        rgba(96, 165, 250, 0.22),
+        transparent 60%
+      ),
+      radial-gradient(
+        760px 520px at 36% 88%,
+        rgba(59, 130, 246, 0.14),
+        transparent 65%
+      ),
+      radial-gradient(
+        760px 520px at 99% 48%,
+        rgba(59, 130, 246, 0.14),
+        transparent 65%
+      ),
+      radial-gradient(
+        900px 720px at 78% 108%,
+        rgba(96, 165, 250, 0.12),
+        transparent 70%
+      );
+    
+      
+    filter: blur(26px);
+    opacity: 0.95;
+  
+    z-index: 0; 
+  }
+  
+  .pd2Interface > * {
+    position: relative;
+    z-index: 1;
+  }
+  
   
   .pd2InterfaceHead {
     display: flex;

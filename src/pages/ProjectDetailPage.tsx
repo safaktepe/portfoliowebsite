@@ -4,6 +4,7 @@ import { getProjectBySlug } from "../data/projects";
 import { MainLayout } from "../layouts/MainLayout";
 import "../styles/projectDetailV2.css";
 import goalIcon from "../assets/goal_icon.png";
+import githubIconPng from "../assets/github_icon.png";
 
 type InterfaceImage = { src: string; alt: string };
 type ProjectWithOptionalInterfaceImages = {
@@ -14,10 +15,12 @@ export function ProjectDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const project = slug ? getProjectBySlug(slug) : undefined;
 
-  // Subtle cursor-following ambient on cards
+  // Subtle cursor-following ambient on cards and CTA Go capsule
   useEffect(() => {
-    const cards = Array.from(document.querySelectorAll<HTMLElement>(".pd2Card"));
-    if (!cards.length) return;
+    const targets = Array.from(
+      document.querySelectorAll<HTMLElement>(".pd2Card, .pd2CtaGo")
+    );
+    if (!targets.length) return;
 
     const onPointerMove = (e: Event) => {
       const pe = e as PointerEvent;
@@ -29,18 +32,23 @@ export function ProjectDetailPage() {
       el.style.setProperty("--my", `${y}px`);
     };
 
-    cards.forEach((el) => {
+    targets.forEach((el) => {
       el.addEventListener("pointermove", onPointerMove, { passive: true } as AddEventListenerOptions);
       el.addEventListener("pointerenter", onPointerMove, { passive: true } as AddEventListenerOptions);
     });
 
     return () => {
-      cards.forEach((el) => {
+      targets.forEach((el) => {
         el.removeEventListener("pointermove", onPointerMove as EventListener);
         el.removeEventListener("pointerenter", onPointerMove as EventListener);
       });
     };
   }, []);
+
+  // Make the hero badge width ~2x its natural width and keep text left-aligned
+  // Reverted: keep badge natural width
+
+  
 
   return (
     <MainLayout
@@ -100,7 +108,9 @@ export function ProjectDetailPage() {
                           target="_blank"
                           rel="noreferrer"
                         >
-                          Source Code
+                          <img className="pd2BtnIcon" src={githubIconPng} alt="" aria-hidden="true" />
+                          <span className="pd2CtaText">Source Code</span>
+                          <span className="pd2CtaGo">Go</span>
                         </a>
                       )}
                     </div>

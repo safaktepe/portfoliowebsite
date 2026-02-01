@@ -37,12 +37,13 @@ export type ProjectSection = {
       note: "The source code for this project is private due to commercial reasons. The app is live and generating revenue.",
       kind: "standard",
       interfaceImages: [
-        { src: "/src/assets/s.png", alt: "..." },
-        { src: "/src/assets/s.png", alt: "..." },
-        { src: "/src/assets/s.png", alt: "..." },
+        { src: "/src/assets/1a.png", alt: "..." },
+        { src: "/src/assets/1a.png", alt: "..." },
+        { src: "/src/assets/1a.png", alt: "..." },
+        { src: "/src/assets/1a.png", alt: "..." },
       ],      
       coverImage: {
-        src: "/src/assets/s.png",
+        src: "/src/assets/1a.png",
         alt: "Pokedex preview",
       },
       links: [
