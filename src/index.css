@@ -20,3 +20,11 @@ body {
 section {
   padding: 72px 0;
 }
+
+html {
+  scrollbar-gutter: stable;
+}
+
+body {
+  overflow-y: scroll;
+}

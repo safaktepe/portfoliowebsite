@@ -1,4 +1,6 @@
+import type React from "react";
 import { Sidebar } from "../components/Sidebar";
+import "../styles/layout.css";
 
 type MainLayoutProps = {
   children: React.ReactNode;
@@ -14,20 +16,13 @@ export function MainLayout({
   onNavLockChange,
 }: MainLayoutProps) {
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        backgroundColor: "#000",
-        color: "#fff",
-        display: "flex",
-      }}
-    >
+    <div className="appFrame">
       <Sidebar
         activeId={activeSectionId}
         onActiveChange={onActiveSectionChange}
         onNavLockChange={onNavLockChange}
       />
-      <main style={{ flex: 1, padding: 32 }}>{children}</main>
+      <main className="appMain">{children}</main>
     </div>
   );
 }

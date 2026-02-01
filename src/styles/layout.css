@@ -1,0 +1,21 @@
+:root {
+  }
+  
+  .appFrame {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  .appMain {
+    flex: 1;
+    padding: 32px;
+    margin-left: var(--sidebar-width, 260px);
+    min-width: 0; 
+  }
+  
+  @media (max-width: 900px) {
+    .appMain {
+      margin-left: 0;
+    }
+  }
+  
