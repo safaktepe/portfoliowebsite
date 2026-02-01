@@ -268,6 +268,24 @@
     transform: translateY(-1px);
     background: rgba(255, 255, 255, 0.08);
   }
+
+  /* Contact button – matches secondary style (no ambient) */
+  .pd2BtnContact {
+    border-radius: 14px; /* match Back to Projects */
+    font-weight: 700;
+    background: rgb(18, 127, 236);
+    color: #fff;
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.10) inset,
+      0 10px 24px rgba(0,0,0,0.35);
+  }
+  .pd2BtnContact:hover {
+    transform: translateY(-1px);
+    background: rgb(16, 118, 220);
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.12) inset,
+      0 14px 30px rgba(0,0,0,0.42);
+  }
   
   .pd2BtnPrimary {
     height: 56px; /* pill height */

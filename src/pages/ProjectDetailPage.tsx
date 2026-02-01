@@ -250,7 +250,7 @@ export function ProjectDetailPage() {
                   </div>
 
                   <div className="pd2FooterActions">
-                    <Link className="pd2Btn pd2BtnPrimary" to="/#contact">
+                    <Link className="pd2Btn pd2BtnContact" to="/#contact">
                       Get in Touch
                     </Link>
                     <Link className="pd2Btn" to="/#projects">
