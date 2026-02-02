@@ -390,11 +390,11 @@
 
     .projectCard {
       padding: 18px;
-      min-height: 460px;
+      min-height: 420px;
     }
 
     .projectCard--featured {
-      min-height: 500px;
+      min-height: 420px;
       transform: translateY(-28px);
     }
 

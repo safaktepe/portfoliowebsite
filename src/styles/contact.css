@@ -309,3 +309,23 @@
   .contactResumeWrap {
     margin-top: auto;
   }
+
+  /* Align CTAs baseline on short-height viewports */
+  @media (max-height: 900px) {
+    /* Ensure cards stretch equally and inner content can flex */
+    .contactGrid { align-items: stretch; }
+    .contactCard { min-height: 0; }
+
+    /* Make the form fill its card and pin CTA to the bottom */
+    .contactForm {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      flex: 1;
+      min-height: 0; /* allow flex children to shrink properly */
+    }
+
+    .contactPrimaryBtn {
+      margin-top: auto; /* align with resume CTA baseline */
+    }
+  }
