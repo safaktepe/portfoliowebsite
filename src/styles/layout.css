@@ -14,8 +14,8 @@
     min-width: 0; 
   }
   
-  /* Sidebar is hidden below 1201px, so main should not offset */
-  @media (max-width: 1200px) {
+  /* Sidebar is hidden below 1024px, so main should not offset */
+  @media (max-width: 1023px) {
     .appMain {
       margin-left: 0;
     }
@@ -48,7 +48,7 @@
 
 
 /* Desktop  */
-@media (min-width: 1201px) {
+@media (min-width: 1024px) {
   .layout{
     display: grid;
     grid-template-columns: 280px 1fr;

@@ -679,3 +679,35 @@
     transform: translateY(-4px);
   }
   
+  /* 1024–1200px: keep comfortable gap from sidebar and center content in the right pane */
+  @media (min-width: 1024px) and (max-width: 1200px) {
+    .pd2 {
+      /* extra inner padding to avoid touching the sidebar */
+      padding-inline: 24px;
+      max-width: 980px;
+    }
+
+    .pd2Hero {
+      /* limit hero width and center it */
+      max-width: 860px;
+      margin-inline: auto;
+      gap: 28px;
+      grid-template-columns: 1.05fr 0.95fr;
+    }
+
+    .pd2Badge { padding: 8px 48px; }
+    .pd2Heading { font-size: 48px; }
+    .pd2Lead { font-size: 17px; }
+
+    /* Make phone and its ambient light read clearly at this width */
+    .pd2HeroRight { justify-content: center; }
+    .pd2Phone { width: 300px; }
+    .pd2Glow {
+      inset: -60px -120px -420px -60px;
+      filter: blur(110px);
+    }
+
+    /* Shrink cards slightly and keep grid breathing room */
+    .pd2Grid { gap: 18px; }
+    .pd2Card { padding: 22px 18px; }
+  }

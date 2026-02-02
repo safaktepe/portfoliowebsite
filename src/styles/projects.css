@@ -366,6 +366,17 @@
       font-size: 0.85em;
     }
   }
+
+  /* 1024–1200: make CTA label smaller so it always fits */
+  @media (min-width: 1024px) and (max-width: 1200px) {
+    .projectCta {
+      height: 38px;
+      font-size: 12px;
+      padding: 0 10px;
+      gap: 8px;
+    }
+    .projectCta span { font-size: 0.8em; }
+  }
   
   .projectCta:hover {
     transform: scale(1.015);

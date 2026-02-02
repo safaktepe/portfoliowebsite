@@ -279,6 +279,15 @@
     transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
     box-sizing: border-box;
   }
+
+  /* 1024–1200: shrink resume CTA text so it fits comfortably */
+  @media (min-width: 1024px) and (max-width: 1200px) {
+    .resumeBtn {
+      font-size: 13px;
+      padding: 10px 12px;
+      letter-spacing: -0.01em; /* keep legibility at smaller size */
+    }
+  }
   
   .resumeBtn:hover {
     transform: scale(1.01);

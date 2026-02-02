@@ -1,6 +1,4 @@
-:root {
-  --sidebar-width: 280px;
-}
+/* --sidebar-width now lives in index.css */
 
 .homeSection {
   min-height: 100vh;
@@ -165,6 +163,23 @@
 @media (min-width: 601px) and (max-width: 1200px) {
   .scrollHint {
     display: none;
+  }
+}
+
+/* Tighter layout for 1024–1200 widths (e.g., 1024x900)
+   - Shrink hero card to avoid touching sidebar/right edge
+   - Keep it centered within the remaining (post-sidebar) width */
+@media (min-width: 1024px) and (max-width: 1200px) {
+  .heroCard {
+    width: min(560px, 88%);
+    padding: 36px 28px;
+    border-radius: 24px;
+    margin-top: -220px;
+  }
+
+  /* Reduce glow spread so it doesn't visually hit edges */
+  .heroCard::before {
+    inset: -56px;
   }
 }
 

@@ -8,6 +8,14 @@ html, body, #root {
 
 :root {
   --accent: #3b82f6;
+  --sidebar-width: 280px; /* desktop default */
+}
+
+/* Compact sidebar on tablets/1024 widths */
+@media (min-width: 1024px) and (max-width: 1200px) {
+  :root {
+    --sidebar-width: 220px;
+  }
 }
 
 /* Full black theme */
