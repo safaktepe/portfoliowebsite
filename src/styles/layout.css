@@ -4,6 +4,7 @@
   .appFrame {
     display: flex;
     min-height: 100vh;
+    overflow-x: clip;
   }
   
   .appMain {
@@ -18,4 +19,48 @@
       margin-left: 0;
     }
   }
+
   
+  
+  
+
+/* Default: mobile + tablet */
+.layout {
+  display: block;
+}
+
+.sidebar {
+  display: none;
+}
+
+.mainLayout {
+  width: 100%;
+  min-width: 0;
+}
+
+@media (max-width: 600px) {
+  .appMain {
+    padding: 16px;
+  }
+}
+
+
+
+/* Desktop  */
+@media (min-width: 1201px) {
+  .layout{
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 24px;
+    min-height: 100vh;     
+    align-items: stretch;  
+  }
+
+  .sidebar{
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+  }
+}
+
+

@@ -79,10 +79,13 @@ function useShellParallax<T extends HTMLElement>(ref: React.RefObject<T | null>)
     if (!el) return;
 
     const prefersReducedMotion =
-      window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
-
-    if (prefersReducedMotion) return;
-
+    window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+  
+  const isMobileOrTablet =
+    window.matchMedia?.("(max-width: 900px)")?.matches;
+  
+  if (prefersReducedMotion || isMobileOrTablet) return;
+  
     let raf = 0;
 
     const update = () => {

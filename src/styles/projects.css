@@ -92,11 +92,8 @@
     align-items: stretch;
   }
   
-  @media (max-width: 1000px) {
-    .projectsGrid {
-      grid-template-columns: 1fr;
-    }
-  }
+
+  
   
   /* Card (glass) */
   .projectCard {
@@ -412,6 +409,68 @@
       height: 42px;
       white-space: nowrap; /* ensure single-line label */
     }
+  }
+
+  
+  /* Mobile */
+
+  @media (max-width: 1000px) {
+    .projectsGrid {
+      grid-template-columns: 1fr 1fr; /* tablet */
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .projectsGrid {
+      grid-template-columns: 1fr; 
+      min-height: 420px;   
+      padding: 18px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .projectsTitle {
+      font-size: 32px;
+      margin-bottom: 16px;
+    }
+  
+    .projectsShell {
+      padding: 0;                
+      background: transparent;   
+      border: 0;
+      box-shadow: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      transform: none;           
+      will-change: auto;
+    }
+
+    .projectCard {
+      min-height: 420px;  
+      padding: 18px;
+    }
+  
+    .projectsGrid {
+      gap: 14px;
+    }
+
+    .projectCard--featured {
+      min-height: 420px;
+      transform: none;     
+    }
+  
+    .projectBody {
+      padding-top: 16px;
+      gap: 10px;
+    }
+  
+    .projectCta {
+      width: 100%;
+      margin: 12px 0 0;    
+    }
+
+
+   
   }
 
   
