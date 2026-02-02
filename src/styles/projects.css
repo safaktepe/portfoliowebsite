@@ -35,11 +35,10 @@
     margin-left: auto;
     margin-right: auto;
   }
-  
-  @media (max-width: 900px) {
-    .projectsInner {
-      width: 92%;
-    }
+
+  /* Make container breathe on tablets */
+  @media (max-width: 1200px) {
+    .projectsInner { width: 92%; }
   }
   
   .projectsTitle {
@@ -67,7 +66,7 @@
     will-change: transform;
 
     border-radius: 16px;
-    padding: 100px;
+    padding: clamp(24px, 7vw, 100px);
   
     background: linear-gradient(
       180deg,
@@ -88,7 +87,8 @@
   .projectsGrid {
     display: grid;
     gap: 24px;
-    grid-template-columns: 1fr 1fr 1fr;
+    /* Equal-width, responsive cards */
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     align-items: stretch;
   }
   
@@ -100,8 +100,8 @@
     cursor: pointer;
     position: relative;
     border-radius: 16px;
-    padding: 22px;
-    min-height: 520px;
+    padding: clamp(14px, 2.4vw, 22px);
+    min-height: clamp(360px, 44vw, 520px);
 
     --mx: 50%;
     --my: 30%;
@@ -215,8 +215,9 @@
   
   
   
-  @media (max-width: 1000px) {
+  @media (max-width: 1200px) {
     .projectCard--featured {
+      min-height: clamp(360px, 44vw, 520px); /* keep same height as others */
       transform: none;
     }
   }
@@ -315,13 +316,17 @@
   /* Wide CTA */
   .projectCta {
     margin: 18px auto 6px;
-    width: 99%;
-    height: 46px;
-  
+    width: 100%;
+    height: clamp(40px, 5vw, 46px);
+
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
+    padding: 0 14px;
+    line-height: 1; /* keep label inside the fixed height */
+    box-sizing: border-box; /* avoid overflow shifting on the right */
+    align-self: center; /* center within card layout */
   
     border-radius: 14px;
     text-decoration: none;
@@ -329,6 +334,7 @@
     color: rgba(255, 255, 255, 0.92);
     font-weight: 700;
     letter-spacing: -0.01em;
+    font-size: clamp(14px, 1.6vw, 16px);
   
     background: rgba(0, 0, 0, 0.35);
     border: 1px solid rgba(255, 255, 255, 0.22);
@@ -345,6 +351,20 @@
       background-color 180ms ease,
       border-color 180ms ease,
       box-shadow 220ms ease;
+  }
+
+  /* Tablet: compact CTA so text+icon always fit */
+  @media (min-width: 700px) and (max-width: 1200px) {
+    .projectCta {
+      height: 40px;
+      font-size: 14px;
+      gap: 8px;
+      padding: 0 12px;
+      white-space: nowrap;
+    }
+    .projectCta span { /* arrow icon */
+      font-size: 0.85em;
+    }
   }
   
   .projectCta:hover {
@@ -414,10 +434,9 @@
   
   /* Mobile */
 
-  @media (max-width: 1000px) {
-    .projectsGrid {
-      grid-template-columns: 1fr 1fr; /* tablet */
-    }
+  /* Tablets: keep three-in-a-row when space allows */
+  @media (min-width: 700px) and (max-width: 1200px) {
+    .projectsGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   }
   
   @media (max-width: 600px) {

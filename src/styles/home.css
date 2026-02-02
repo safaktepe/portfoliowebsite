@@ -161,6 +161,13 @@
   }
 }
 
+/* Hide scroll hint on tablets */
+@media (min-width: 601px) and (max-width: 1200px) {
+  .scrollHint {
+    display: none;
+  }
+}
+
 .scrollText {
   font-size: 12px;
   letter-spacing: 0.12em;

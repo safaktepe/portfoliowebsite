@@ -14,7 +14,8 @@
     min-width: 0; 
   }
   
-  @media (max-width: 900px) {
+  /* Sidebar is hidden below 1201px, so main should not offset */
+  @media (max-width: 1200px) {
     .appMain {
       margin-left: 0;
     }
@@ -62,5 +63,3 @@
     justify-content: center; 
   }
 }
-
-

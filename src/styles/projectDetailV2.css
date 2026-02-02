@@ -635,6 +635,20 @@
     .pd2HeroRight {
       justify-content: center;
     }
+    /* Center hero content on mobile & tablets */
+    .pd2HeroLeft {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center; /* center title and lead */
+    }
+    .pd2Lead {
+      margin-left: auto;
+      margin-right: auto; /* keep readable width but centered */
+    }
+    .pd2Actions {
+      justify-content: center; /* center CTA buttons */
+    }
     .pd2Grid {
       grid-template-columns: 1fr;
     }
