@@ -365,4 +365,53 @@
   }
   
     
+  /*
+   * Height-aware compaction for short viewports
+   * - Keep desktop/ultrawide visuals identical
+   * - Only adjust spacing within the Projects section
+   */
+  @media (max-height: 900px) {
+    .projectsSection {
+      padding-top: 48px;
+      padding-bottom: 90px;
+    }
+
+    .projectsTitle {
+      margin-bottom: 24px;
+    }
+
+    .projectsShell {
+      padding: 64px;
+    }
+
+    .projectsGrid {
+      gap: 20px;
+    }
+
+    .projectCard {
+      padding: 18px;
+      min-height: 460px;
+    }
+
+    .projectCard--featured {
+      min-height: 500px;
+      transform: translateY(-28px);
+    }
+
+    .projectBody {
+      padding-top: 16px;
+      gap: 10px;
+    }
+
+    .projectDesc {
+      -webkit-line-clamp: 3; /* keep content concise without changing font sizes */
+    }
+
+    .projectCta {
+      margin: 12px auto 4px; /* bring closer to content */
+      height: 42px;
+      white-space: nowrap; /* ensure single-line label */
+    }
+  }
+
   
