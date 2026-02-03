@@ -40,6 +40,13 @@
   @media (max-width: 1200px) {
     .projectsInner { width: 92%; }
   }
+
+  /* 1440x900 class screens: ensure three columns fit comfortably */
+  @media (min-width: 1400px) and (max-width: 1600px) {
+    .projectsInner { width: 88%; }
+    .projectsShell { padding: 56px; }
+    /* Keep auto-fit behavior; reduced padding + wider container yields 3 cols */
+  }
   
   .projectsTitle {
     margin: 0 0 32px;

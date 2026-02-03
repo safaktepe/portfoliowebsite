@@ -679,6 +679,33 @@
     transform: translateY(-4px);
   }
   
+  /* 1440x900 class screens: center all major sections and keep gap from sidebar */
+  @media (min-width: 1400px) and (max-width: 1600px) {
+    .pd2 { padding-inline: 32px; }
+
+    /* Constrain and center hero and following sections */
+    .pd2Hero,
+    .pd2Grid,
+    .pd2Interface,
+    .pd2Footer {
+      max-width: 1060px;
+      margin-inline: auto;
+    }
+
+    .pd2Hero { gap: 36px; }
+    .pd2Heading { font-size: 52px; }
+    .pd2Lead { font-size: 18px; }
+
+    /* Keep phone glow readable but not bleeding into sidebar */
+    .pd2Glow { inset: -40px -120px -520px -40px; filter: blur(120px); }
+
+    /* Slightly reduce grid density so cards don't look cramped */
+    .pd2Grid { gap: 20px; }
+    .pd2Card { padding: 24px 20px; }
+
+    /* Center rail content more and reduce width to keep side gutters */
+    .pd2Rail[data-centered="true"] { width: 90%; margin-inline: auto; }
+  }
   /* 1024–1200px: keep comfortable gap from sidebar and center content in the right pane */
   @media (min-width: 1024px) and (max-width: 1200px) {
     .pd2 {
