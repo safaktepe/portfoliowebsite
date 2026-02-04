@@ -220,3 +220,9 @@
     display: none;
   }
 }
+
+@supports (-webkit-touch-callout: none) {
+  .heroCard::before {
+    animation: none !important;
+  }
+}

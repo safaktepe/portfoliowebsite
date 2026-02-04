@@ -376,3 +376,42 @@
     margin: 12px 0 0;
   }
 }
+
+/* Large desktop only */
+@media (min-width: 1441px) and (min-height: 900px) {
+  .projectsShell {
+    padding: 72px; 
+  }
+
+  .projectCard {
+    min-height: 520px; 
+  }
+
+  .projectCard--featured {
+    min-height: 560px;
+    transform: translateY(-40px); 
+  }
+
+  .projectCard--featured:hover {
+    transform: translateY(-50px);
+  }
+}
+
+/* Safety: smaller heights don't get the offset (prevents awkward overflow) */
+@media (min-width: 1441px) and (max-height: 899px) {
+  .projectCard--featured {
+    transform: none;
+  }
+  .projectCard--featured:hover {
+    transform: translateY(-6px);
+  }
+}
+
+@supports (-webkit-touch-callout: none) {
+  .projectCard,
+  .projectCta,
+  .projectMedia img {
+    transition: none !important;
+  }
+}
+

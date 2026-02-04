@@ -1,38 +1,84 @@
 /* Full-screen reset */
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   margin: 0;
   background: #000;
   color: #fff;
 }
 
-:root {
-  --accent: #3b82f6;
-  --sidebar-width: 280px; /* desktop default */
+/* Global safety */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-/* Compact sidebar on tablets/1024 widths */
+:root {
+  --accent: #3b82f6;
+  --sidebar-width: 280px;
+}
+
 @media (min-width: 1024px) and (max-width: 1200px) {
   :root {
     --sidebar-width: 220px;
   }
 }
 
-/* Full black theme */
 body {
   background: #000;
   color: #fff;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-}
-
-section {
-  padding: 72px 0;
+  overflow-y: scroll;
 }
 
 html {
   scrollbar-gutter: stable;
 }
 
-body {
-  overflow-y: scroll;
+section {
+  padding: 72px 0;
+}
+
+/* Safari performance mode */
+@supports (-webkit-touch-callout: none) {
+  /* Avoid reveal states causing blank sections */
+  .isVisible,
+  .contentVisible {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Remove expensive blur layers */
+  .heroCard,
+  .projectsShell,
+  .projectCard,
+  .aboutCard,
+  .contactCard {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    background: rgba(255, 255, 255, 0.07) !important;
+  }
+
+  /* Kill huge blurred glows */
+  .heroCard::before,
+  .projectsSection::before {
+    filter: none !important;
+    opacity: 0.55 !important;
+    animation: none !important;
+  }
+
+  /* Reduce expensive transitions */
+  .projectCard,
+  .projectCta,
+  .projectMedia img {
+    transition: none !important;
+  }
+
+  /* Ensure no leftover GPU hints */
+  .projectsShell {
+    will-change: auto !important;
+    transform: none !important;
+  }
 }

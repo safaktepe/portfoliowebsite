@@ -1,5 +1,4 @@
 import type React from "react";
-import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 import "../styles/projects.css";
@@ -73,62 +72,13 @@ function ProjectCard({ href, imageSrc, title, description, featured }: ProjectCa
   );
 }
 
-function useShellParallax<T extends HTMLElement>(ref: React.RefObject<T | null>) {
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const prefersReducedMotion =
-    window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
-  
-  const isMobileOrTablet =
-    window.matchMedia?.("(max-width: 900px)")?.matches;
-  
-  if (prefersReducedMotion || isMobileOrTablet) return;
-  
-    let raf = 0;
-
-    const update = () => {
-      raf = 0;
-
-      const rect = el.getBoundingClientRect();
-      const vh = window.innerHeight || 1;
-
-      const t = (rect.top + rect.height * 0.5) / vh;
-      const centered = t - 0.5;
-      const clamped = Math.max(-0.5, Math.min(0.5, centered));
-
-      const y = clamped * -50;
-      el.style.setProperty("--parallaxY", `${y.toFixed(2)}px`);
-    };
-
-    const onScroll = () => {
-      if (raf) return;
-      raf = window.requestAnimationFrame(update);
-    };
-
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-      if (raf) window.cancelAnimationFrame(raf);
-    };
-  }, [ref]);
-}
-
 export function ProjectsSection() {
-  const shellRef = useRef<HTMLDivElement | null>(null);
-  useShellParallax(shellRef);
-
   return (
     <section id="projects" className="projectsSection">
       <div className="projectsInner">
         <h2 className="projectsTitle">Featured Works</h2>
 
-        <div className="projectsShell" ref={shellRef}>
+        <div className="projectsShell">
           <div className="projectsGrid">
             <ProjectCard
               href="/projects/pokedex"
