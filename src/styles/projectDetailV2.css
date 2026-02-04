@@ -269,6 +269,23 @@
     background: rgba(255, 255, 255, 0.08);
   }
 
+  /* Light button variant for contrast on dark backgrounds */
+  .pd2BtnLight {
+    background: #ffffff;
+    color: #111111;
+    font-weight: 700;
+    box-shadow:
+      0 0 0 1px rgba(0, 0, 0, 0.06) inset,
+      0 10px 24px rgba(0, 0, 0, 0.22);
+  }
+  .pd2BtnLight:hover {
+    background: #f5f5f5;
+    transform: translateY(-1px);
+    box-shadow:
+      0 0 0 1px rgba(0, 0, 0, 0.08) inset,
+      0 14px 30px rgba(0, 0, 0, 0.30);
+  }
+
   /* Contact button – matches secondary style (no ambient) */
   .pd2BtnContact {
     border-radius: 14px; /* match Back to Projects */

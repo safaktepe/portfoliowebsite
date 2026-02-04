@@ -253,7 +253,7 @@ export function ProjectDetailPage() {
                     <Link className="pd2Btn pd2BtnContact" to="/#contact">
                       Get in Touch
                     </Link>
-                    <Link className="pd2Btn" to="/#projects">
+                    <Link className="pd2Btn pd2BtnLight" to="/#projects">
                       Back to Projects
                     </Link>
                   </div>

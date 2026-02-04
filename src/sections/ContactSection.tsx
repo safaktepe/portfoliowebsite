@@ -1,10 +1,12 @@
+import { useState } from "react";
+import emailjs from "emailjs-com";
 import "../styles/contact.css";
 
 const SOCIALS = [
   { label: "GitHub", href: "https://github.com/safaktepe", icon: "github" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/USERNAME", icon: "linkedin" },
-  { label: "X", href: "https://x.com/USERNAME", icon: "x" },
-  { label: "Email", href: "mailto:you@example.com", icon: "mail" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/safaktepemert/", icon: "linkedin" },
+  { label: "X", href: "https://x.com/devmertos", icon: "x" },
+  { label: "Email", href: "mailto:safaktepemert@gmail.com", icon: "mail" },
 ] as const;
 
 function Icon({ name }: { name: (typeof SOCIALS)[number]["icon"] }) {
@@ -51,10 +53,15 @@ function Icon({ name }: { name: (typeof SOCIALS)[number]["icon"] }) {
 }
 
 export function ContactSection() {
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
+
   function handleCardSpotlight(e: React.MouseEvent<HTMLElement>) {
+    if (window.matchMedia("(hover: none)").matches) return;
+
     const el = e.currentTarget;
     const r = el.getBoundingClientRect();
-
     const x = ((e.clientX - r.left) / r.width) * 100;
     const y = ((e.clientY - r.top) / r.height) * 100;
 
@@ -64,9 +71,35 @@ export function ContactSection() {
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    // Placeholder: wire to your backend/service later.
-  }
+    const form = e.currentTarget; // keep a stable ref before async work
 
+    if (loading) return; // prevent double submit
+
+    setLoading(true);
+    setSuccess(false);
+    setError(false);
+
+    emailjs
+      .sendForm(
+        "service_vfs0gjf",
+        "template_qejro42",
+        form,
+        "c5ZfwWK2CkEYZ0G7o"
+      )
+      .then(() => {
+        setSuccess(true);
+        setError(false);
+        form.reset();
+      })
+      .catch(() => {
+        setError(true);
+        setSuccess(false);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }
+  
   return (
     <section id="contact" className="contactSection">
       <div className="contactInner">
@@ -84,33 +117,25 @@ export function ContactSection() {
               e.currentTarget.style.removeProperty("--my");
             }}
           >
-            <h3 className="contactCardTitle">Get in Touch</h3>
+            <h3 className="contactCardTitle">Send a Message</h3>
 
             <form className="contactForm" onSubmit={onSubmit}>
-              <label className="field">
-                <span className="srOnly">Your Name</span>
-                <input className="input" name="name" placeholder="Your Name" autoComplete="name" />
-              </label>
+              <input type="text" name="name" className="input" placeholder="Your Name" required />
+              <input type="email" name="email" className="input" placeholder="Your Email" required />
+              <textarea
+                name="message"
+                className="textarea"
+                placeholder="Your Message"
+                rows={6}
+                required
+              />
 
-              <label className="field">
-                <span className="srOnly">Your Email</span>
-                <input
-                  className="input"
-                  name="email"
-                  type="email"
-                  placeholder="Your Email"
-                  autoComplete="email"
-                />
-              </label>
-
-              <label className="field">
-                <span className="srOnly">Your Message</span>
-                <textarea className="textarea" name="message" placeholder="Your Message" rows={7} />
-              </label>
-
-              <button type="submit" className="contactPrimaryBtn">
-                Send Message
+              <button type="submit" className="contactPrimaryBtn" disabled={loading}>
+                {loading ? "Sending..." : "Send Message"}
               </button>
+
+              {success && <p className="formSuccess">Message sent successfully.</p>}
+              {error && <p className="formError">Something went wrong. Please try again.</p>}
             </form>
           </div>
 
@@ -124,7 +149,7 @@ export function ContactSection() {
           >
             <h3 className="contactCardTitle">Connect With Me</h3>
 
-            <div className="socialRow" aria-label="Social links">
+            <div className="socialRow">
               {SOCIALS.map((s) => (
                 <a
                   key={s.label}
@@ -133,7 +158,6 @@ export function ContactSection() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={s.label}
-                  title={s.label}
                 >
                   <Icon name={s.icon} />
                 </a>
@@ -148,8 +172,7 @@ export function ContactSection() {
             <div className="infoBlock">
               <h4 className="infoTitle">Availability</h4>
               <p className="infoText">
-                Currently seeking full-time opportunities and open to collaborations within dynamic and
-                innovative companies
+                Currently seeking full-time opportunities and open to collaborations
               </p>
             </div>
 
