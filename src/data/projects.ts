@@ -41,7 +41,7 @@ export type InterfaceItem =
     {
       slug: "pokedex",
       title: "Pokedex",
-      subtitle: "Fast search and clean detail views for Pokémon data.",
+      subtitle: "Pokedex is a native iOS application built with Swift that allows users to browse, search, and favorite Pokémon using a clean MVVM architecture and a modern UIKit-based interface.",
       note: "The source code for this project is private due to commercial reasons. The app is live and generating revenue.",
       kind: "standard",
       interfaceItems: [
@@ -59,12 +59,12 @@ export type InterfaceItem =
       ],
       stack: ["React", "TypeScript", "Vite"],
       bento: {
-        goal: "Build a fast, distraction-free browsing experience with a clean list → detail flow.",
-        approach: "Keep state predictable, optimize search interactions, and design for clear loading/empty/error states.",
-        performance: "Minimize unnecessary rerenders during filtering and navigation to keep the UI responsive.",
-        technicalDecisions: "Type-safe API models, URL-driven detail routing, and reusable UI primitives to keep the codebase maintainable.",
-        challenges: "Balancing UX clarity with dense data while keeping the interface calm and readable.",
-        improvements: "Add caching, advanced filters, and accessibility refinements after validating the core experience."
+        goal: "The goal of this project was to build a modern and well-structured iOS version of an existing Android Pokedex application, focusing on clean architecture, scalability, and best practices in native iOS development.",
+        approach: "The app was developed using the MVVM architecture to ensure separation of concerns and maintainable code. The user flow was kept simple and familiar, consisting of a main Pokémon list with search functionality, a detailed Pokémon view, and a favorites screen.",
+        performance: "The application delivers smooth scrolling and fast image loading by leveraging efficient networking and caching strategies. Image-heavy screens remain responsive thanks to optimized list rendering and smart memory usage.",
+        technicalDecisions: "UIKit was chosen for full control over layout and backward compatibility, including support for iOS 11. Dependency injection was used to improve testability and reduce coupling between components. The app consumes Pokémon data from a public RESTful API, while third-party libraries such as Kingfisher, Lottie, and custom UI components were integrated to enhance user experience without overcomplicating the core architecture.",
+        challenges: "Adapting an Android-based design and interaction model to iOS while preserving platform-specific UX standards was a key challenge. Managing image-heavy lists efficiently and maintaining architectural clarity as features expanded were also important considerations.",
+        improvements: "I would introduce a more modern networking layer, add unit tests for view models, and refine the UI using newer iOS components while maintaining the existing architectural foundation."
       },      
       sections: [
         {
@@ -98,7 +98,7 @@ export type InterfaceItem =
     {
       slug: "75-hard",
       title: "75 Hard",
-      subtitle: "iOS (Swift) app that helps people discipline themselves and become better both mentally and physically. It includes a hard challenge that lasts 75 days. There are 6 different tasks that users must complete every day. The user marks the completed task. The tasks are reset every evening at 00:00 and the day counter is incremented by 1.",
+      subtitle: "A Swift-based iOS app that helps users build mental and physical discipline through the 75 Hard challenge. The app guides users through a structured 75-day program with six daily tasks, automatically resetting progress at midnight to reinforce consistency and accountability. Fully localized in five languages, the app has reached over 1,500 downloads worldwide, demonstrating real user adoption and international reach.",
       note: "⚠️ 🚨 Explore the complete details of my projects, including code and screenshots, by visiting my GitHub repository. Click here to explore!",
       kind: "standard",
       coverImage: {
@@ -130,12 +130,18 @@ export type InterfaceItem =
         }
       ],
       bento: {
-        goal: "Make daily tracking frictionless while preserving a sense of progress and consistency.",
-        approach: "Design a today-first flow with clear task completion and a simple mental model for repeat usage.",
-        performance: "Keep interactions instant by relying on local-first patterns and lightweight UI updates.",
-        technicalDecisions: "Simple state boundaries, predictable updates, and persistence that survives refreshes and device restarts.",
-        challenges: "Avoiding a cluttered UI while still supporting a 75-day timeline and repeatable daily habits.",
-        improvements: "Add optional streaks/stats and export features once the daily UX is validated."
+        goal:
+          "To create a mobile app that helps users complete the 75 Hard challenge — a 75-day mental and physical discipline program where users track daily tasks like workouts, hydration, reading, and more. The app supports users in building consistency and accountability throughout the challenge.",
+        approach:
+          "Built as an iOS app using Swift, UIKit, and an MVVM architecture, the app provides a clean and intuitive UI. Core features include task tracking with daily completion, an automatic reset at midnight, progress counting, and a smooth onboarding experience to guide first-time users.",
+        performance:
+          "The app offers efficient performance with fast responsiveness even for daily checks and state updates. Using CoreData for local storage ensures quick data retrieval without server dependency, resulting in a lightweight and reliable experience for users completing their daily challenge.",
+        technicalDecisions:
+          "• Swift & UIKit were chosen for native performance and close control over UI/UX. MVVM pattern increases code maintainability and testability. CoreData was used for persistent local storage so that user progress remains on device without backend complexity. These decisions ensured a scalable and efficient codebase suitable for future feature expansion.",
+        challenges:
+          "• Handling daily state reset at midnight in a way that feels seamless for the user. Keeping progress tracking accurate across timezones and local date changes.",
+        improvements:
+          "• Add cloud sync and backup so users don’t lose progress across devices. Add statistics & insights (streaks, trends) to better motivate users completing the challenge."
       },      
       sections: [
         {
@@ -168,7 +174,7 @@ export type InterfaceItem =
     {
         slug: "bedtime-stories",
         title: "Bedtime Stories",
-        subtitle: "A calming bedtime storytelling experience for children.",
+        subtitle: "Bedtime Stories is a multilingual iOS app that helps children relax and fall asleep through original, narrated bedtime stories designed to gently share positive values.",
         note: "The source code for this project is private due to commercial reasons. The app is live and generating revenue.",
         kind: "featured", 
         coverImage: {
@@ -201,12 +207,12 @@ export type InterfaceItem =
           { kind: "image", src: "https://assets.safaktepe.com/bedtime/6bt_settings.png", alt: "Settings screen" }
         ],
         bento: {
-            goal: "Create a night-friendly interface with strong readability, minimal distractions, and a simple story discovery flow.",
-            approach: "Use calm typography and spacing, then drive the experience through a clean list → reader journey.",
-            performance: "Prioritize smooth transitions and keep the reader lightweight to avoid visual/interaction noise.",
-            technicalDecisions: "Reusable UI primitives, route-driven screens, and a structure that keeps UI and content concerns separated.",
-            challenges: "Staying visually soft while maintaining accessible contrast and a clear hierarchy for kids and parents.",
-            improvements: "Add filters (age/length), reading preferences (font size), and better content organization once the core UX is validated."
+            goal: "The goal of Bedtime Stories was to help children gently wind down before sleep while receiving positive values and life lessons in a way that feels engaging rather than instructional. The app aims to make bedtime calmer for both children and parents by combining storytelling with a soothing experience.",
+            approach: "Bedtime Stories was designed around short, original stories that balance entertainment and gentle guidance. Each story lasts around ten minutes and is brought to life with character-based voice acting and supportive visuals, allowing children to relax, listen, and naturally transition into sleep without overstimulation.",
+            performance: "The app is optimized for smooth audio playback and fast content delivery. Stories are streamed only when needed and cached locally based on the user’s locale, ensuring a responsive experience while keeping storage usage under control.",
+            technicalDecisions: "The app was built using UIKit to maintain full control over performance and UI behavior. All content is delivered online with a subscription-based model, while preview access allows users to explore stories before committing. To reduce backend and bandwidth costs, Firebase is used selectively, and a custom caching mechanism manages localized story downloads and automatically clears unused data.",
+            challenges: "One of the main challenges was delivering rich, multilingual content without inflating costs or storage usage. Another key challenge was maintaining a calm and child-friendly experience while integrating AI-generated stories, visuals, and voice acting in a cohesive and natural way.",
+            improvements: "I would introduce lightweight animations for story visuals, expand personalization based on age or preferences, and refine the caching strategy further as the content library grows after launch."
           },          
         sections: [
           {

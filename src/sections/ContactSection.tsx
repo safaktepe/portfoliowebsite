@@ -196,7 +196,13 @@ export function ContactSection() {
             </div>
 
             <div className="contactResumeWrap">
-              <a className="resumeBtn" href="/resume.pdf" target="_blank" rel="noreferrer">
+              <a
+                className="resumeBtn"
+                href="https://assets.safaktepe.com/Mert_Safaktepe_Resume.pdf"
+                download="Mert_Safaktepe_Resume.pdf"
+                target="_blank"
+                rel="noreferrer"
+              >
                 Download My Resume
               </a>
             </div>
