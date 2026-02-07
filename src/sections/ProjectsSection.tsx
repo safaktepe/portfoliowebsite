@@ -2,7 +2,6 @@ import type React from "react";
 import { useNavigate } from "react-router-dom";
 
 import "../styles/projects.css";
-import bedtimeImg from "../assets/bedtime-stories.png";
 
 type ProjectCardProps = {
   href: string;
@@ -81,25 +80,25 @@ export function ProjectsSection() {
         <div className="projectsShell">
           <div className="projectsGrid">
             <ProjectCard
-              href="/projects/pokedex"
-              imageSrc="/vite.svg"
-              title="Pokedex"
-              description="Fast search and clean detail views for Pokémon data."
+              href="/projects/75-hard"
+              imageSrc="https://assets.safaktepe.com/covers/head.png"
+              title="75 Hard"
+              description="A minimal daily tracker with progress and history."
             />
 
             <ProjectCard
               href="/projects/bedtime-stories"
-              imageSrc={bedtimeImg}
+              imageSrc="https://assets.safaktepe.com/covers/bt_cover.webp"
               title="Bedtime Stories"
               description="An app concept for children featuring soothing short stories to make bedtime calmer."
               featured
             />
 
             <ProjectCard
-              href="/projects/75-hard"
-              imageSrc="/vite.svg"
-              title="75 Hard Tracker"
-              description="A minimal daily tracker with progress and history."
+              href="/projects/pokedex"
+              imageSrc="https://assets.safaktepe.com/covers/cover_pokedex.webp"
+              title="Pokedex"
+              description="Fast search and clean detail views for Pokémon data."
             />
           </div>
         </div>

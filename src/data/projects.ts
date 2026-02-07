@@ -3,10 +3,18 @@ export type ProjectSection = {
     content: string;
   };
   
+// Media shown in the Project Interface rail
+export type InterfaceItem =
+  | { kind: "image"; src: string; alt: string }
+  | { kind: "video"; mp4: string; webm?: string; poster?: string; alt: string };
+
   export type Project = {
     slug: string;
     title: string;
+    // Legacy images array (kept for backward compatibility)
     interfaceImages?: Array<{ src: string; alt: string }>;
+    // New media array supporting video items
+    interfaceItems?: InterfaceItem[];
     subtitle: string;
     note?: string;
     kind: "standard" | "featured"; 
@@ -36,14 +44,13 @@ export type ProjectSection = {
       subtitle: "Fast search and clean detail views for Pokémon data.",
       note: "The source code for this project is private due to commercial reasons. The app is live and generating revenue.",
       kind: "standard",
-      interfaceImages: [
-        { src: "/src/assets/1a.png", alt: "..." },
-        { src: "/src/assets/1a.png", alt: "..." },
-        { src: "/src/assets/1a.png", alt: "..." },
-        { src: "/src/assets/1a.png", alt: "..." },
+      interfaceItems: [
+        { kind: "image", src: "https://assets.safaktepe.com/pokedex/1y.png", alt: "Pokedex list view" },
+        { kind: "image", src: "https://assets.safaktepe.com/pokedex/2y.png", alt: "Pokedex detail view" },
+        { kind: "image", src: "https://assets.safaktepe.com/pokedex/3y.png", alt: "Pokedex search/filter" },
       ],      
       coverImage: {
-        src: "/src/assets/1a.png",
+        src: "https://assets.safaktepe.com/pokedex/2y.png",
         alt: "Pokedex preview",
       },
       links: [
@@ -90,19 +97,38 @@ export type ProjectSection = {
   
     {
       slug: "75-hard",
-      title: "75 Hard Tracker",
+      title: "75 Hard",
       subtitle: "iOS (Swift) app that helps people discipline themselves and become better both mentally and physically. It includes a hard challenge that lasts 75 days. There are 6 different tasks that users must complete every day. The user marks the completed task. The tasks are reset every evening at 00:00 and the day counter is incremented by 1.",
       note: "⚠️ 🚨 Explore the complete details of my projects, including code and screenshots, by visiting my GitHub repository. Click here to explore!",
       kind: "standard",
       coverImage: {
-        src: "/src/assets/",
-        alt: "75 Hard Tracker preview",
+        src: "https://assets.safaktepe.com/75hard/2hard.png",
+        alt: "75 Hard preview",
       },
       links: [
         { label: "GitHub", href: "https://github.com/..." },
         { label: "Live", href: "https://..." },
       ],
       stack: ["React", "TypeScript", "Vite"],
+      interfaceItems: [
+        { kind: "image", src: "https://assets.safaktepe.com/75hard/1hard.png", alt: "Intro screen" },
+        { kind: "image", src: "https://assets.safaktepe.com/75hard/2hard.png", alt: "Main view" },
+        { kind: "image", src: "https://assets.safaktepe.com/75hard/3hard.png", alt: "Progress or detail" },
+        {
+          kind: "video",
+          mp4: "https://assets.safaktepe.com/75hard/onboarding_hard.mp4",
+          webm: "https://assets.safaktepe.com/75hard/onboarding_hard.webm",
+          poster: "https://assets.safaktepe.com/75hard/2hard.png",
+          alt: "Onboarding flow"
+        },
+        {
+          kind: "video",
+          mp4: "https://assets.safaktepe.com/75hard/ss_hard.mp4",
+          webm: "https://assets.safaktepe.com/75hard/ss_hard.webm",
+          poster: "https://assets.safaktepe.com/75hard/3hard.png",
+          alt: "In-app interaction"
+        }
+      ],
       bento: {
         goal: "Make daily tracking frictionless while preserving a sense of progress and consistency.",
         approach: "Design a today-first flow with clear task completion and a simple mental model for repeat usage.",
@@ -146,7 +172,7 @@ export type ProjectSection = {
         note: "The source code for this project is private due to commercial reasons. The app is live and generating revenue.",
         kind: "featured", 
         coverImage: {
-          src: "https://your-cf-domain.com/images/bedtime-stories.png",
+          src: "https://assets.safaktepe.com/bedtime/bt_preview.png",
           alt: "Bedtime Stories preview",
         },
         links: [
@@ -154,6 +180,26 @@ export type ProjectSection = {
           { label: "Live", href: "https://..." },
         ],
         stack: ["React", "TypeScript", "Vite"],
+        interfaceItems: [
+          {
+            kind: "video",
+            mp4: "https://assets.safaktepe.com/bedtime/1bt_onboarding.mp4",
+            webm: "https://assets.safaktepe.com/bedtime/1bt_onboarding.webm",
+            poster: "https://assets.safaktepe.com/bedtime/3bt_paywall.png",
+            alt: "Onboarding flow"
+          },
+          {
+            kind: "video",
+            mp4: "https://assets.safaktepe.com/bedtime/2bt_main.mp4",
+            webm: "https://assets.safaktepe.com/bedtime/2bt_main.webm",
+            poster: "https://assets.safaktepe.com/bedtime/3bt_paywall.png",
+            alt: "Main screen interactions"
+          },
+          { kind: "image", src: "https://assets.safaktepe.com/bedtime/3bt_paywall.png", alt: "Paywall" },
+          { kind: "image", src: "https://assets.safaktepe.com/bedtime/4bt_pawywall_detail.png", alt: "Paywall detail" },
+          { kind: "image", src: "https://assets.safaktepe.com/bedtime/5bt_listen.png", alt: "Listen view" },
+          { kind: "image", src: "https://assets.safaktepe.com/bedtime/6bt_settings.png", alt: "Settings screen" }
+        ],
         bento: {
             goal: "Create a night-friendly interface with strong readability, minimal distractions, and a simple story discovery flow.",
             approach: "Use calm typography and spacing, then drive the experience through a clean list → reader journey.",

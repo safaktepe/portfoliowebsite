@@ -9,9 +9,12 @@ import pergelIcon from "../assets/pergel_icon.png";
 import commandIcon from "../assets/komut_icon.png";
 import okIcon from "../assets/ok_icon.png";
 
-type InterfaceImage = { src: string; alt: string };
-type ProjectWithOptionalInterfaceImages = {
-  interfaceImages?: InterfaceImage[];
+type InterfaceItem =
+  | { kind: "image"; src: string; alt: string }
+  | { kind: "video"; mp4: string; webm?: string; poster?: string; alt: string };
+type ProjectWithOptionalInterfaceItems = {
+  interfaceItems?: InterfaceItem[];
+  interfaceImages?: { src: string; alt: string }[]; // legacy fallback
 };
 
 export function ProjectDetailPage() {
@@ -70,15 +73,20 @@ export function ProjectDetailPage() {
           </div>
         ) : (
           (() => {
-            const p = project as ProjectWithOptionalInterfaceImages;
+            const p = project as ProjectWithOptionalInterfaceItems;
 
-            const interfaceImages =
-              p.interfaceImages && p.interfaceImages.length >= 3
-                ? p.interfaceImages
-                : [project.coverImage, project.coverImage, project.coverImage];
+            const mediaItems: InterfaceItem[] = p.interfaceItems
+              ? p.interfaceItems
+              : p.interfaceImages && p.interfaceImages.length
+              ? p.interfaceImages.map((img) => ({ kind: "image", src: img.src, alt: img.alt }))
+              : [
+                  { kind: "image", src: project.coverImage.src, alt: project.coverImage.alt },
+                  { kind: "image", src: project.coverImage.src, alt: project.coverImage.alt },
+                  { kind: "image", src: project.coverImage.src, alt: project.coverImage.alt },
+                ];
 
-            const shouldCenterRail = interfaceImages.length === 3;
-            const showRailControls = interfaceImages.length >= 4;
+            const shouldCenterRail = mediaItems.length === 3;
+            const showRailControls = mediaItems.length >= 4;
 
             const sourceCodeLink = project.links.find(
               (l) => l.label === "GitHub"
@@ -225,15 +233,29 @@ export function ProjectDetailPage() {
                       className="pd2Rail"
                       data-centered={shouldCenterRail ? "true" : "false"}
                     >
-                      {interfaceImages.map((img, idx) => (
-                        <div className="pd2RailItem" key={`${img.src}-${idx}`}>
+                      {mediaItems.map((item, idx) => (
+                        <div className="pd2RailItem" key={`${item.kind === 'image' ? item.src : item.mp4}-${idx}`}>
                           <div className="pd2Phone pd2PhoneSmall">
                             <div className="pd2Notch" />
-                            <img
-                              className="pd2PhoneImg"
-                              src={img.src}
-                              alt={img.alt}
-                            />
+                            {item.kind === "video" ? (
+                              <video
+                                className="pd2PhoneImg"
+                                autoPlay
+                                muted
+                                loop
+                                playsInline
+                                preload="metadata"
+                                poster={item.poster}
+                                aria-label={item.alt}
+                              >
+                                {item.webm && (
+                                  <source src={item.webm} type="video/webm" />
+                                )}
+                                <source src={item.mp4} type="video/mp4" />
+                              </video>
+                            ) : (
+                              <img className="pd2PhoneImg" src={item.src} alt={item.alt} />
+                            )}
                           </div>
                         </div>
                       ))}
