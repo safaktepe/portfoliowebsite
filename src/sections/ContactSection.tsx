@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import emailjs from "emailjs-com";
 import "../styles/contact.css";
 
@@ -56,6 +56,25 @@ export function ContactSection() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
+
+  // Prefill subject if present in sessionStorage (e.g., from Bedtime modal)
+  useEffect(() => {
+    try {
+      const v = sessionStorage.getItem("prefillSubject");
+      if (!v) return;
+      const form = document.querySelector(".contactForm") as HTMLFormElement | null;
+      if (!form) return;
+      let input = form.querySelector("input[name='subject']") as HTMLInputElement | null;
+      if (!input) {
+        input = document.createElement("input");
+        input.type = "hidden";
+        input.name = "subject";
+        form.appendChild(input);
+      }
+      input.value = v;
+      sessionStorage.removeItem("prefillSubject");
+    } catch {}
+  }, []);
 
   function handleCardSpotlight(e: React.MouseEvent<HTMLElement>) {
     if (window.matchMedia("(hover: none)").matches) return;

@@ -1,5 +1,5 @@
-import { Link, useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { getProjectBySlug } from "../data/projects";
 import { MainLayout } from "../layouts/MainLayout";
 import "../styles/projectDetailV2.css";
@@ -8,6 +8,7 @@ import githubIconPng from "../assets/github_icon.png";
 import pergelIcon from "../assets/pergel_icon.png";
 import commandIcon from "../assets/komut_icon.png";
 import okIcon from "../assets/ok_icon.png";
+import { AccessibleModal } from "../components/AccessibleModal";
 
 type InterfaceItem =
   | { kind: "image"; src: string; alt: string }
@@ -20,6 +21,16 @@ type ProjectWithOptionalInterfaceItems = {
 export function ProjectDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const project = slug ? getProjectBySlug(slug) : undefined;
+  const [bedtimeOpen, setBedtimeOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const openBedtimeModal = () => setBedtimeOpen(true);
+  const closeBedtimeModal = () => setBedtimeOpen(false);
+
+  const scrollToContactWithSubject = () => {
+    try { sessionStorage.setItem("prefillSubject", "Code access request — Bedtime Stories"); } catch {}
+    navigate("/#contact");
+  };
 
   // Subtle cursor-following ambient on cards and CTA Go capsule
   useEffect(() => {
@@ -53,7 +64,7 @@ export function ProjectDetailPage() {
 
   // Make the hero badge width ~2x its natural width and keep text left-aligned
   // Reverted: keep badge natural width
-
+  
   
 
   return (
@@ -88,9 +99,8 @@ export function ProjectDetailPage() {
             const shouldCenterRail = mediaItems.length === 3;
             const showRailControls = mediaItems.length >= 4;
 
-            const sourceCodeLink = project.links.find(
-              (l) => l.label === "GitHub"
-            );
+            const sourceCodeLink = project.links.find((l) => l.label === "GitHub");
+            const isBedtime = project.slug === "bedtime-stories";
 
             const scrollRail = (dir: -1 | 1) => {
               const el = document.getElementById("pd2Rail");
@@ -112,7 +122,7 @@ export function ProjectDetailPage() {
                     <p className="pd2Lead">{project.subtitle}</p>
 
                     <div className="pd2Actions">
-                      {sourceCodeLink && (
+                      {sourceCodeLink && !isBedtime && (
                         <a
                           className="pd2Btn pd2BtnPrimary"
                           href={sourceCodeLink.href}
@@ -123,6 +133,42 @@ export function ProjectDetailPage() {
                           <span className="pd2CtaText">Source Code</span>
                           <span className="pd2CtaGo">Go</span>
                         </a>
+                      )}
+
+                      {isBedtime && (
+                        <>
+                          <button type="button" className="pd2Btn pd2BtnPrimary" onClick={openBedtimeModal}>
+                            <img className="pd2BtnIcon" src={githubIconPng} alt="" aria-hidden="true" />
+                            <span className="pd2CtaText">Request Code Access</span>
+                            <span className="pd2CtaGo">Go</span>
+                          </button>
+
+                          <AccessibleModal
+                            open={bedtimeOpen}
+                            onClose={closeBedtimeModal}
+                            title="Private Repository"
+                            body={
+                              <>
+                                <p>This project is under active commercial development and planned for an App Store release.</p>
+                                <p>The source code is private, but I’m happy to walk through the architecture, technical decisions, and selected parts of the codebase with hiring teams.</p>
+                              </>
+                            }
+                            secondary={{
+                              label: "View Case Study",
+                              onClick: () => {
+                                closeBedtimeModal();
+                              },
+                            }}
+                            primary={{
+                              label: "Contact Me",
+                              onClick: () => {
+                                closeBedtimeModal();
+                                scrollToContactWithSubject();
+                              },
+                            }}
+                            footerNote="Available for hiring teams and technical interviews."
+                          />
+                        </>
                       )}
                     </div>
                   </div>

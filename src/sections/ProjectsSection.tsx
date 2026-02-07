@@ -9,6 +9,8 @@ type ProjectCardProps = {
   title: string;
   description: string;
   featured?: boolean;
+  secondaryLabel?: string;
+  onSecondaryClick?: () => void;
 };
 
 function setPointerVars(e: React.MouseEvent<HTMLElement>) {
@@ -27,7 +29,7 @@ function clearPointerVars(e: React.MouseEvent<HTMLElement>) {
   el.style.removeProperty("--my");
 }
 
-function ProjectCard({ href, imageSrc, title, description, featured }: ProjectCardProps) {
+function ProjectCard({ href, imageSrc, title, description, featured, secondaryLabel, onSecondaryClick }: ProjectCardProps) {
   const navigate = useNavigate();
   const className = featured ? "projectCard projectCard--featured" : "projectCard";
 
@@ -66,10 +68,26 @@ function ProjectCard({ href, imageSrc, title, description, featured }: ProjectCa
         >
           View Case Study <span aria-hidden="true">↗</span>
         </a>
+
+        {secondaryLabel && (
+          <button
+            type="button"
+            className="projectCta projectCta--secondary"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              onSecondaryClick?.();
+            }}
+          >
+            {secondaryLabel}
+          </button>
+        )}
       </div>
     </article>
   );
 }
+
+/* Modal removed from landing card as requested */
 
 export function ProjectsSection() {
   return (
@@ -101,6 +119,7 @@ export function ProjectsSection() {
               description="Fast search and clean detail views for Pokémon data."
             />
           </div>
+          {/* Modal integration intentionally removed on landing card */}
         </div>
       </div>
     </section>

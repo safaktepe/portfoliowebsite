@@ -54,7 +54,7 @@ export type InterfaceItem =
         alt: "Pokedex preview",
       },
       links: [
-        { label: "GitHub", href: "https://github.com/..." },
+        { label: "GitHub", href: "https://github.com/safaktepe/PokedexApp" },
         { label: "Live", href: "https://..." },
       ],
       stack: ["React", "TypeScript", "Vite"],
@@ -106,7 +106,7 @@ export type InterfaceItem =
         alt: "75 Hard preview",
       },
       links: [
-        { label: "GitHub", href: "https://github.com/..." },
+        { label: "GitHub", href: "https://github.com/safaktepe/AnotherMe-Project" },
         { label: "Live", href: "https://..." },
       ],
       stack: ["React", "TypeScript", "Vite"],
