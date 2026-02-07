@@ -5,6 +5,9 @@ import { MainLayout } from "../layouts/MainLayout";
 import "../styles/projectDetailV2.css";
 import goalIcon from "../assets/goal_icon.png";
 import githubIconPng from "../assets/github_icon.png";
+import pergelIcon from "../assets/pergel_icon.png";
+import commandIcon from "../assets/komut_icon.png";
+import okIcon from "../assets/ok_icon.png";
 
 type InterfaceImage = { src: string; alt: string };
 type ProjectWithOptionalInterfaceImages = {
@@ -144,7 +147,7 @@ export function ProjectDetailPage() {
                   <article className="pd2Card">
                     <div className="pd2CardHead pd2CardHead--stack">
                       <span className="pd2CardIconWrap" aria-hidden="true">
-                        <img className="pd2CardIcon" src={goalIcon} alt="" />
+                        <img className="pd2CardIcon pd2IconBoost" src={pergelIcon} alt="" />
                       </span>
                       <h3 className="pd2CardTitle">The Approach</h3>
                     </div>
@@ -159,7 +162,7 @@ export function ProjectDetailPage() {
                   <article className="pd2Card pd2Span2 pd2RowTight">
                     <div className="pd2CardHead pd2CardHead--row">
                       <span className="pd2CardIconWrap" aria-hidden="true">
-                        <img className="pd2CardIcon" src={goalIcon} alt="" />
+                        <img className="pd2CardIcon pd2IconBoost" src={commandIcon} alt="" />
                       </span>
                       <h3 className="pd2CardTitle">Technical Decisions</h3>
                     </div>
@@ -176,7 +179,7 @@ export function ProjectDetailPage() {
                   <article className="pd2Card pd2Span3 pd2RowTight">
                     <div className="pd2CardHead pd2CardHead--row">
                       <span className="pd2CardIconWrap" aria-hidden="true">
-                        <img className="pd2CardIcon" src={goalIcon} alt="" />
+                        <img className="pd2CardIcon pd2IconBoost" src={okIcon} alt="" />
                       </span>
                       <h3 className="pd2CardTitle">What I’d Improve</h3>
                     </div>

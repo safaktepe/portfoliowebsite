@@ -109,17 +109,15 @@
   .pd2RowTight .pd2CardHead--row .pd2CardTitle {
     transform: translateX(-18px);
   }
-  .pd2RowTight .pd2CardHead--row .pd2CardIcon {
-    transform: translateX(-12px); 
-  }
+  .pd2RowTight .pd2CardHead--row .pd2CardIcon { --icon-translate-x: -12px; }
   .pd2RowTight .pd2CardHead--row + .pd2Muted,
   .pd2RowTight .pd2Muted {
     margin-top: 6px; /* bringing text closer to header */
   }
   
   .pd2CardIconWrap {
-    width: auto;
-    height: auto;
+    width: 80px;
+    height: 80px;
     border-radius: 0;
     background: none;
     box-shadow: none;
@@ -127,24 +125,25 @@
   }
     
   .pd2CardIcon {
-    width: 80px;
-    height: 80px;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
     opacity: 0.9;
-    transform: none;
+    --icon-translate-x: 0px;
+    --icon-scale: 1;
+    transform: translateX(var(--icon-translate-x)) scale(var(--icon-scale));
     display: block;
     margin: 0px;
   }
 
   .pd2CardHead--stack .pd2CardIconWrap { margin-left: 0; }
-  .pd2CardHead--stack .pd2CardIcon {
-    transform: translateX(-18px);
-  }
+  .pd2CardHead--stack .pd2CardIcon { --icon-translate-x: -18px; }
 
   /* Nudge the row-style header icon slightly left for balance */
-  .pd2CardHead--row .pd2CardIcon {
-    transform: translateX(-12px);
-  }
+  .pd2CardHead--row .pd2CardIcon { --icon-translate-x: -12px; }
+
+  /* Slightly boost non-goal icons to visually match */
+  .pd2IconBoost { --icon-scale: 1.42; }
 
   .pd2Muted {
     margin: 12px 0 0;
