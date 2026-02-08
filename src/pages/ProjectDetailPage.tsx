@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 import { getProjectBySlug } from "../data/projects";
 import { MainLayout } from "../layouts/MainLayout";
 import "../styles/projectDetailV2.css";
-import goalIcon from "../assets/goal_icon.png";
-import githubIconPng from "../assets/github_icon.png";
-import pergelIcon from "../assets/pergel_icon.png";
-import commandIcon from "../assets/komut_icon.png";
-import okIcon from "../assets/ok_icon.png";
+// Inline the small UI icons to avoid any prod base-path or rewrite issues
+// Vite's `?inline` forces data URI embedding regardless of size limit
+import goalIcon from "../assets/goal_icon.png?inline";
+import githubIconPng from "../assets/github_icon.png?inline";
+import pergelIcon from "../assets/pergel_icon.png?inline";
+import commandIcon from "../assets/komut_icon.png?inline";
+import okIcon from "../assets/ok_icon.png?inline";
 import { AccessibleModal } from "../components/AccessibleModal";
 
 type InterfaceItem =
@@ -23,6 +25,9 @@ export function ProjectDetailPage() {
   const project = slug ? getProjectBySlug(slug) : undefined;
   const [bedtimeOpen, setBedtimeOpen] = useState(false);
   const navigate = useNavigate();
+  const isTouchDevice = typeof window !== "undefined" &&
+    (('matchMedia' in window && window.matchMedia('(hover: none)').matches) ||
+     ('matchMedia' in window && window.matchMedia('(pointer: coarse)').matches));
 
   const openBedtimeModal = () => setBedtimeOpen(true);
   const closeBedtimeModal = () => setBedtimeOpen(false);
@@ -129,7 +134,7 @@ export function ProjectDetailPage() {
                           target="_blank"
                           rel="noreferrer"
                         >
-                          <img className="pd2BtnIcon" src={githubIconPng} alt="" aria-hidden="true" />
+                          <img className="pd2BtnIcon" src={githubIconPng} alt="" aria-hidden="true" width={24} height={24} decoding="async" />
                           <span className="pd2CtaText">Source Code</span>
                           <span className="pd2CtaGo">Go</span>
                         </a>
@@ -138,7 +143,7 @@ export function ProjectDetailPage() {
                       {isBedtime && (
                         <>
                           <button type="button" className="pd2Btn pd2BtnPrimary" onClick={openBedtimeModal}>
-                            <img className="pd2BtnIcon" src={githubIconPng} alt="" aria-hidden="true" />
+                            <img className="pd2BtnIcon" src={githubIconPng} alt="" aria-hidden="true" width={24} height={24} decoding="async" />
                             <span className="pd2CtaText">Request Code Access</span>
                             <span className="pd2CtaGo">Go</span>
                           </button>
@@ -181,6 +186,8 @@ export function ProjectDetailPage() {
                         className="pd2PhoneImg"
                         src={project.coverImage.src}
                         alt={project.coverImage.alt}
+                        loading="eager"
+                        decoding="async"
                       />
                     </div>
                   </div>
@@ -191,7 +198,7 @@ export function ProjectDetailPage() {
                   <article className="pd2Card">
                     <div className="pd2CardHead pd2CardHead--stack">
                       <span className="pd2CardIconWrap" aria-hidden="true">
-                        <img className="pd2CardIcon" src={goalIcon} alt="" />
+                        <img className="pd2CardIcon" src={goalIcon} alt="" width={80} height={80} decoding="async" />
                       </span>
                       <h3 className="pd2CardTitle">The Goal</h3>
                     </div>
@@ -201,7 +208,7 @@ export function ProjectDetailPage() {
                   <article className="pd2Card">
                     <div className="pd2CardHead pd2CardHead--stack">
                       <span className="pd2CardIconWrap" aria-hidden="true">
-                        <img className="pd2CardIcon pd2IconBoost" src={pergelIcon} alt="" />
+                        <img className="pd2CardIcon pd2IconBoost" src={pergelIcon} alt="" width={80} height={80} decoding="async" />
                       </span>
                       <h3 className="pd2CardTitle">The Approach</h3>
                     </div>
@@ -216,7 +223,7 @@ export function ProjectDetailPage() {
                   <article className="pd2Card pd2Span2 pd2RowTight">
                     <div className="pd2CardHead pd2CardHead--row">
                       <span className="pd2CardIconWrap" aria-hidden="true">
-                        <img className="pd2CardIcon pd2IconBoost" src={commandIcon} alt="" />
+                        <img className="pd2CardIcon pd2IconBoost" src={commandIcon} alt="" width={80} height={80} decoding="async" />
                       </span>
                       <h3 className="pd2CardTitle">Technical Decisions</h3>
                     </div>
@@ -233,7 +240,7 @@ export function ProjectDetailPage() {
                   <article className="pd2Card pd2Span3 pd2RowTight">
                     <div className="pd2CardHead pd2CardHead--row">
                       <span className="pd2CardIconWrap" aria-hidden="true">
-                        <img className="pd2CardIcon pd2IconBoost" src={okIcon} alt="" />
+                        <img className="pd2CardIcon pd2IconBoost" src={okIcon} alt="" width={80} height={80} decoding="async" />
                       </span>
                       <h3 className="pd2CardTitle">What I’d Improve</h3>
                     </div>
@@ -286,11 +293,11 @@ export function ProjectDetailPage() {
                             {item.kind === "video" ? (
                               <video
                                 className="pd2PhoneImg"
-                                autoPlay
+                                autoPlay={!isTouchDevice}
                                 muted
                                 loop
                                 playsInline
-                                preload="metadata"
+                                preload={isTouchDevice ? "none" : "metadata"}
                                 poster={item.poster}
                                 aria-label={item.alt}
                               >
@@ -300,7 +307,7 @@ export function ProjectDetailPage() {
                                 <source src={item.mp4} type="video/mp4" />
                               </video>
                             ) : (
-                              <img className="pd2PhoneImg" src={item.src} alt={item.alt} />
+                              <img className="pd2PhoneImg" src={item.src} alt={item.alt} loading="lazy" decoding="async" />
                             )}
                           </div>
                         </div>

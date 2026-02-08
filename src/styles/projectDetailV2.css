@@ -671,6 +671,30 @@
     .pd2Span2, .pd2Span3 {
       grid-column: span 1;
     }
+
+    /* Reduce heavy GPU effects on mobile Safari */
+    .pd2Card {
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      background: rgba(255,255,255,0.05);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.06) inset,
+        0 18px 40px rgba(0,0,0,0.40);
+    }
+    .pd2Card::after { display: none; }
+    .pd2Glow { display: none; }
+    .pd2Interface::before { display: none; }
+  }
+
+  /* On touch devices, further dial back costly filters */
+  @media (hover: none), (pointer: coarse) {
+    .pd2Card {
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+    .pd2Card::after { display: none; }
+    .pd2Glow { display: none; }
+    .pd2Interface::before { display: none; }
   }
   
   /* Rail image hover – subtle zoom */
